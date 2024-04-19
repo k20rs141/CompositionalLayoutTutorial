@@ -1,0 +1,14 @@
+{
+  "name": "sample-api-mock",
+  "version": "1.0.0",
+  "description": "MockServer for ComplexCollectionViewStyleExample project.",
+  "main": "index.js",
+  "scripts": {
+      "json-server": "json-server --watch db.json"
+  },
+  "author": "kokiyamada",
+  "license": "ISC",
+  "devDependencies": {
+    "json-server": "^1.0.0-alpha.23"
+  }
+}

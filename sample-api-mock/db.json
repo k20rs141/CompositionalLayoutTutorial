@@ -1,0 +1,7 @@
+{
+  "posts": [
+    { "id": 1, "title": "first", "author": ["foo"], "favorits": 10 },
+    { "id": 2, "title": "second", "author": ["bar", "baz"], "favorits": 1 }
+  ],
+  "profile": { "name": "ashi", "age": 2 }
+}
