@@ -1,10 +1,10 @@
 {
-  "name": "sample-api-mock",
+  "name": "json-mock-server",
   "version": "1.0.0",
-  "description": "MockServer for ComplexCollectionViewStyleExample project.",
+  "description": "MockServer for CompositionalLayoutTutorial project.",
   "main": "index.js",
   "scripts": {
-      "json-server": "json-server --watch db.json"
+      "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "kokiyamada",
   "license": "ISC",
