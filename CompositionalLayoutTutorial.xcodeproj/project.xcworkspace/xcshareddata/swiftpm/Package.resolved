@@ -1,5 +1,5 @@
 {
-  "originHash" : "ae34600cfe765b010341aaf9c2fe94ebe456d466fe17dcedbc5dc35a6e00dcfe",
+  "originHash" : "3cc43f84efbb67ccfeafb1531256c74023eef7e43a65e2e2626d12ab24011dd6",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "8eaa3a15e4dcabaca4c95aea4c0ff0c9b4a67213",
         "version" : "1.10.5"
+      }
+    },
+    {
+      "identity" : "promises",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/promises.git",
+      "state" : {
+        "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
+        "version" : "2.4.0"
       }
     },
     {
