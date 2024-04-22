@@ -27,6 +27,7 @@
 		89F096632BD6275100A81C59 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F096622BD6275100A81C59 /* APIProvider.swift */; };
 		89F096652BD6276700A81C59 /* APIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F096642BD6276700A81C59 /* APIType.swift */; };
 		89F096682BD629A000A81C59 /* Promises in Frameworks */ = {isa = PBXBuildFile; productRef = 89F096672BD629A000A81C59 /* Promises */; };
+		89F0966A2BD6320900A81C59 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F096692BD6320900A81C59 /* APIError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		89F0965F2BD617ED00A81C59 /* RegularArticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularArticles.swift; sourceTree = "<group>"; };
 		89F096622BD6275100A81C59 /* APIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProvider.swift; sourceTree = "<group>"; };
 		89F096642BD6276700A81C59 /* APIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIType.swift; sourceTree = "<group>"; };
+		89F096692BD6320900A81C59 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,8 @@
 				89EF6A092BCE3F30005FCB8D /* ViewController.swift */,
 				89F096612BD6273F00A81C59 /* API */,
 				89F096562BD6123900A81C59 /* Model */,
+				89F0966B2BD66EB400A81C59 /* ViewModel */,
+				89F0966C2BD66EBF00A81C59 /* View */,
 				89EF6A0E2BCE3F31005FCB8D /* Assets.xcassets */,
 				89EF6A102BCE3F31005FCB8D /* LaunchScreen.storyboard */,
 				89EF6A132BCE3F31005FCB8D /* Info.plist */,
@@ -113,8 +117,23 @@
 			children = (
 				89F096622BD6275100A81C59 /* APIProvider.swift */,
 				89F096642BD6276700A81C59 /* APIType.swift */,
+				89F096692BD6320900A81C59 /* APIError.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		89F0966B2BD66EB400A81C59 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		89F0966C2BD66EBF00A81C59 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +232,7 @@
 				89F096582BD6124D00A81C59 /* Interviews.swift in Sources */,
 				89F0965E2BD617E300A81C59 /* NewArrivalArticles.swift in Sources */,
 				89F096632BD6275100A81C59 /* APIProvider.swift in Sources */,
+				89F0966A2BD6320900A81C59 /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
