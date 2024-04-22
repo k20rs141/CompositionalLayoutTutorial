@@ -1,0 +1,372 @@
+{
+    "get_articles": [
+        {
+            "id": 1,
+            "title": "朝食にゆっくりと味わって食べたいサンドイッチ",
+            "summary": "気持ち良い朝の目覚めにぴったり。ルノアールのサンドイッチが食べたいなぁ。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample1.jpg"
+        },
+        {
+            "id": 2,
+            "title": "A5ランクの国産牛を使った最強のビーフステーキ",
+            "summary": "これこそまさに最高の贅沢。いいことがあったから今夜は食べよう。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample2.jpg"
+        },
+        {
+            "id": 3,
+            "title": "紹興酒との最高のおともになる中華料理の前菜",
+            "summary": "中華料理はいつも僕のテンションを上げてくれる。前菜だけでも魅力的である。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample3.jpg"
+        },
+        {
+            "id": 4,
+            "title": "サーモンとクリームチーズのクラッカー",
+            "summary": "生のチースは僕はとっても苦手ですが、サーモンとクリームチーズの組み合わせは好きです。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample4.jpg"
+        },
+        {
+            "id": 5,
+            "title": "エビとカニをたくさん使った豪華なピザ",
+            "summary": "みんなで食べるピザも美味しいですね。勉強会などでもよく出てくるのでどんなものに出会えるか楽しみです。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample5.jpg"
+        },
+        {
+            "id": 6,
+            "title": "オマール海老のビスク的な何かのスープ",
+            "summary": "前菜として出てきても、バケットを浸けて食べても美味しい。スープが美味しいと次もなぜか期待してしまう。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample6.jpg"
+        },
+        {
+            "id": 7,
+            "title": "東欧周辺でよく食べられているであろうジャガイモ料理",
+            "summary": "寒い地方ではごくごく当たり前なジャガイモ料理ではありますが向こうでは主食になるんですね。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample7.jpg"
+        },
+        {
+            "id": 8,
+            "title": "ボリュームがめっちゃ多いヨーグルトドリンク",
+            "summary": "めっちゃ美味しそうではあるんですが、おやつには多すぎるし朝食でも多すぎる。でもグイッと飲みたい。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample8.jpg"
+        },
+        {
+            "id": 9,
+            "title": "なぜか美味しそうでついつい買って食べてしまうタコス",
+            "summary": "軽食や朝食で食べたいと思うタコス。毎日ではないけど1つなら朝食にもちょうどいい量ですね。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample9.jpg"
+        },
+        {
+            "id": 10,
+            "title": "ランチでいっぱい食べたい時にオススメな豚バラグリルの定食",
+            "summary": "定食でよく見かける豚バラの焼肉だけども、こんな感じでランチで出てくればめっちゃ豪華なご馳走である。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample10.jpg"
+        },
+        {
+            "id": 11,
+            "title": "マヨネーズと明太子の組み合わせが嬉しいどんぶりもの",
+            "summary": "マヨネーズと明太子の組み合わせが相性抜群で手応えも食べ応えもバッチリな一品です。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample11.jpg"
+        },
+        {
+            "id": 12,
+            "title": "風格あるバナナチョコレートを使ったデザート",
+            "summary": "これこそまさに最高の贅沢。いいことがあったから今夜は食べよう。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample12.jpg"
+        },
+        {
+            "id": 13,
+            "title": "中南米エリアの定番料理トルティーヤ",
+            "summary": "誠に申し訳ございません。「タコス」と「トルティーヤ」の違いがイマイチよくわかっておりません...。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample13.jpg"
+        },
+        {
+            "id": 14,
+            "title": "ワインにぴったりなおつまみの盛り合わせ",
+            "summary": "生のチースは僕はとっても苦手ですが、サーモンとクリームチーズの組み合わせは好きです。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample14.jpg"
+        },
+        {
+            "id": 15,
+            "title": "僕の大好物の1つでもある味噌ラーメン",
+            "summary": "味噌ラーメンとはなんとも不思議だ。元々は違う文化から発展した食べ物であるにも関わらず、日本文化の色が根強く残っていると感じる。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample15.jpg"
+        },
+        {
+            "id": 16,
+            "title": "小ぶりで可愛らしいけど美味しいエビフライ",
+            "summary": "夕食のおかずに出てくると思わずテンションが上がるラインナップですね。子供も大人も嬉しくなるメニューです。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample16.jpg"
+        },
+        {
+            "id": 17,
+            "title": "家庭的なおかずのような焼肉料理",
+            "summary": "人類はいつからご馳走を焼肉とするようになってしまったのか...。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample17.jpg"
+        },
+        {
+            "id": 18,
+            "title": "高級感としずる感が半端ではないステーキ",
+            "summary": "ご馳走と呼ぶにふさわしいステーキですね。思わず誘惑にぼろ負けしそうである。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample18.jpg",
+            "rating": "8.1"
+        },
+        {
+            "id": 19,
+            "title": "韓国料理の煮込み料理の定番スンドゥブチゲ",
+            "summary": "冬の寒い季節には最高ですね。体も温まるし栄養もたっぷりなので助かります。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample19.jpg"
+        },
+        {
+            "id": 20,
+            "title": "中華料理の定番メニューにも関わらす奥深い炒飯",
+            "summary": "家で作って食べても、冷凍食品でも、お店で食べてもあまりハズレがない気がします。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample20.jpg"
+        },
+        {
+            "id": 21,
+            "title": "シンプルに美味そうなエビのバター炒め",
+            "summary": "ビールのおつまみにもご飯のおかずの一皿にもぴったりのシンプルな一皿ですね。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample21.jpg"
+        },
+        {
+            "id": 22,
+            "title": "韓国の滋養たっぷりな薬膳メニュー参鶏湯",
+            "summary": "薬膳要素もたっぷり含まれているので健康にも抜群な人気メニューですね。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample22.jpg"
+        },
+        {
+            "id": 23,
+            "title": "豪華なメインディッシュにぴったりのラムチョップ",
+            "summary": "丁寧に焼かれたラムのローストは本当に美味しいですよね。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample23.jpg"
+        },
+        {
+            "id": 24,
+            "title": "シンプルだけど美味しいタコス1皿盛り合わせ",
+            "summary": "メキシコ料理はお酒にもマッチするし、印象とは裏腹に辛さが本当に心地よいですね。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample24.jpg"
+        },
+        {
+            "id": 25,
+            "title": "ベリーが乗った可愛いパンケーキ",
+            "summary": "家のホットケーキミックスで作るものとは桁違いの美味しさとフワフワ感を感じてみよ。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample25.jpg"
+        },
+        {
+            "id": 26,
+            "title": "豪華海鮮丼づくしのラインナップ",
+            "summary": "彩り豊かで新鮮な海の幸をこれでもかと言わんばかりに盛り込んだものは宝石箱のごたる。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample26.jpg"
+        },
+        {
+            "id": 27,
+            "title": "ひとくちサイズの可愛いハンバーガー",
+            "summary": "1個の大きさは小さいけれども、味は本物なのは間違いない！",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample27.jpg"
+        },
+        {
+            "id": 28,
+            "title": "あさりの美味しさがたっぷりのボンゴレパスタ",
+            "summary": "濃厚な貝特有の美味しさをシンプルにかつダイレクトに味わえるメニューです。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample28.jpg"
+        },
+        {
+            "id": 29,
+            "title": "みんな大好き間違いないポークジンジャー",
+            "summary": "ご飯のおかずには最高なポークジンジャーですね。これこそ日本が作り出した最高のおかず！",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample29.jpg"
+        },
+        {
+            "id": 30,
+            "title": "なかなか味わえない地アジの握り寿司",
+            "summary": "そういえばなかなか刺身でアジを食べる機会は少ない。何気ないけど将来的には高級魚になってしまうのかな？",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample30.jpg"
+        },
+        {
+            "id": 31,
+            "title": "おつまみの定番大盛りフライドポテト",
+            "summary": "定番中の定番のファストメニューではあるけれど手元にあるとついつい取っちゃうヤツですね。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample31.jpg"
+        },
+        {
+            "id": 32,
+            "title": "チーズと牡蠣の相性が良いグラタン",
+            "summary": "牡蠣も本当に日本でもポピュラーで調理バリエーションが多いので本当に嬉しいです。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample32.jpg"
+        },
+        {
+            "id": 33,
+            "title": "自分が一番好きなケーキでもあるティラミス",
+            "summary": "甘さがきつくないマスカルポーネチーズの美味しさが際立つ優しいケーキだと思います。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample33.jpg"
+        },
+        {
+            "id": 34,
+            "title": "おやつにテンションが上がるシュークリーム",
+            "summary": "子供だった頃に憧れていたおやつは僕の場合はシュークリームでした。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample34.jpg"
+        },
+        {
+            "id": 35,
+            "title": "甘くて心がおどりそうなチョコレートムース",
+            "summary": "チョコレートの濃厚な甘さと滑らかな口当たりがポイント。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample35.jpg"
+        },
+        {
+            "id": 36,
+            "title": "めっちゃ辛いけどその味が病みつきになるタイ風レッドカレー",
+            "summary": "野菜もたっぷりで栄養満点のカレーに激辛スパイスが加わってご飯がとまらない美味しさです。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample36.jpg"
+        },
+        {
+            "id": 37,
+            "title": "見た目からしても食べるのが勿体無いキノコのマリネ",
+            "summary": "ヘルシーなとれたてのキノコに旨味を引き出すドレッシングを合わせればあら不思議！",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample37.jpg"
+        },
+        {
+            "id": 38,
+            "title": "握り寿司と巻き寿司の盛り合わせ10種類",
+            "summary": "ご馳走メニューにふさわしいラインナップを揃えた豪華バージョン。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample38.jpg"
+        },
+        {
+            "id": 39,
+            "title": "朝食の一品にもあると嬉しい生サラミ",
+            "summary": "ハムともソーセージとも違うパンにも相性が抜群な一品です。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample39.jpg"
+        },
+        {
+            "id": 40,
+            "category_number": 6,
+            "title": "いちごのちょっと変わったショートケーキ",
+            "summary": "子供の頃に誰もが憧れていたいちごのショートケーキ。",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/sample40.jpg"
+        }
+    ],
+    "get_new_arrivals": [
+        {
+            "id": 1,
+            "title": "リングイネのクリームパスタ",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/new1.jpg"
+        },
+        {
+            "id": 2,
+            "title": "厚切りポークジンジャー",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/new2.jpg"
+        },
+        {
+            "id": 3,
+            "title": "ミックスフライランチプレート",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/new3.jpg"
+        },
+        {
+            "id": 4,
+            "title": "クリスピータイプミックスピザ",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/new4.jpg"
+        },
+        {
+            "id": 5,
+            "title": "ハンバーグランチプレート",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/new5.jpg"
+        },
+        {
+            "id": 6,
+            "title": "特製ローストポークオーバーライス",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/new6.jpg"
+        }
+    ],
+    "get_keywords": [
+        {
+            "id": 1,
+            "keyword": "タピオカ"
+        },
+        {
+            "id": 2,
+            "keyword": "バスク風チーズケーキ"
+        },
+        {
+            "id": 3,
+            "keyword": "チーズタッカルビ"
+        },
+        {
+            "id": 4,
+            "keyword": "高級食パン"
+        },
+        {
+            "id": 5,
+            "keyword": "サバ缶"
+        },
+        {
+            "id": 6,
+            "keyword": "パネチキン"
+        },
+        {
+            "id": 7,
+            "keyword": "バナナジュース"
+        },
+        {
+            "id": 8,
+            "keyword": "お茶ラテ"
+        },
+        {
+            "id": 9,
+            "keyword": "ハリッサ"
+        },
+        {
+            "id": 10,
+            "keyword": "ラタトゥイユ"
+        }
+    ],
+    "get_featured_interviews": [
+        {
+            "id": 1,
+            "profile_name": "testuser123456",
+            "date_string": "2019.11.10",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/interview1.jpg",
+            "title": "ランチなのに美味しいお寿司が、こんなに安いお値段で食べ放題。️",
+            "description": "握り寿司🍣を好きなネタ10貫分選べて、オプションで海苔巻きを追加できてお値段は1980円💰。今回は「サーモンが食べたい️️」気分だったので全部サーモンにしてみました💦",
+            "tags" : "お寿司,握り寿司,巻き寿司,サーモン,2000円以内,東京,ランチタイム,食べ放題,築地時間制限なし,築地"
+        },
+        {
+            "id": 2,
+            "profile_name": "testuser123456",
+            "date_string": "2019.11.10",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/interview2.jpg",
+            "title": "大好物のボルシチをこの休日に頑張って作ってみました！個人的には結構いい感じに仕上がったと思います！（そしてゆくゆくは私の得意料理としてみんなに振舞うぞ！）",
+            "description": "久しぶりに母が地元から遊びにきたので、手料理を振る舞おうと思い立って手料理を作ってあげました🥕赤かぶやサワークリーム等の欠かせない材料は近所で購入してビーフ🥩多めの感じに仕上げました。母にも料理や食生活は問題ないことが伝えられたので、あの時からは成長しているんだなーと。\nでもね、お味噌汁とか野菜炒めに関してはまだまだあの懐かしい絶妙な味はまだまだ再現することは出来ていないのですね...",
+            "tags" : "ボルシチ,ロシア料理,家庭でもできるレシピ,煮込み料理,贅沢なディナー,手料理"
+        }
+    ],
+    "get_featured_banners": [
+        {
+            "id": 1,
+            "title": "第1弾は朝に嬉しいサンドイッチの特集",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/featured1.jpg",
+            "date_string": "2019.11.10"
+        },
+        {
+            "id": 2,
+            "title": "第2弾は日本人の心ともいえるおにぎり特集",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/featured2.jpg",
+            "date_string": "2019.11.10"
+        },
+        {
+            "id": 3,
+            "title": "第3弾はシンプルだけども美味しいゆで卵特集",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/featured3.jpg",
+            "date_string": "2019.11.10"
+        },
+        {
+            "id": 4,
+            "title": "第4弾はお正月スペシャルのお雑煮特集",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/featured4.jpg",
+            "date_string": "2019.11.10"
+        },
+        {
+            "id": 5,
+            "title": "第5弾は朝食にあると嬉しいおかず特集",
+            "image_url": "https://s3-ap-northeast-1.amazonaws.com/development-image-samples/thumbnails/featured5.jpg",
+            "date_string": "2019.11.10"
+        }
+    ]
+}
