@@ -7,6 +7,16 @@
 
 import Foundation
 
-struct Interviews: Codable {
-    var 
+struct Interviews: Codable, Hashable {
+    let id: Int
+    let profileName: String
+    let dateString: String
+    let imageUrl: String
+    let title: String
+    let description: String
+    let tags: String
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

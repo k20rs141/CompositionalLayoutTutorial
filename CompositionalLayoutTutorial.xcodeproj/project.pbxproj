@@ -92,11 +92,11 @@
 		89F096562BD6123900A81C59 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				89F096572BD6124D00A81C59 /* Interviews.swift */,
-				89F0965F2BD617ED00A81C59 /* RegularArticles.swift */,
 				89F096592BD617A700A81C59 /* Banners.swift */,
-				89F0965D2BD617E300A81C59 /* NewArrivalArticles.swift */,
+				89F096572BD6124D00A81C59 /* Interviews.swift */,
 				89F0965B2BD617B400A81C59 /* RecentKeywords.swift */,
+				89F0965D2BD617E300A81C59 /* NewArrivalArticles.swift */,
+				89F0965F2BD617ED00A81C59 /* RegularArticles.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

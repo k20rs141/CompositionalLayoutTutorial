@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct RecentKeywords: Codable, Hashable {
+    let id: Int
+    let keyword: String
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
