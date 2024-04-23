@@ -8,14 +8,10 @@ enum MainSection: Int, CaseIterable {
     case regularArticles
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UICollectionViewDelegate {
     let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.view.backgroundColor = .systemBackground
-    }
+    private let mainViewModel: MainViewModel = .init()
+    private var collectionView: UICollectionView!
     // UICollectionViewを差分更新するため
     private  var snapshot: NSDiffableDataSourceSnapshot<MainSection, AnyHashable>!
     // UICollectionViewを組み立てるためのDataSource
@@ -36,10 +32,10 @@ class ViewController: UIViewController {
                 return self?.createRecentKeyordsLayout()
 
             case MainSection.newArrivalArticles.rawValue:
-                return self?.createNewArrivalArticlesLayout()
+                return self?.createNewMenuItemsLayout()
 
             case MainSection.regularArticles.rawValue:
-                return self?.createRegularArticlesLayout()
+                return self?.createRecommendedArticlesLayout()
 
             default:
                 fatalError()
@@ -47,6 +43,42 @@ class ViewController: UIViewController {
         }
         return layout
     }()
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = .systemBackground
+        responseAPI()
+    }
+
+    private func setupCollectionView() {
+        // MainSection: 0 (FeaturedBanner)
+        collectionView.registerCustomCell(BannersCollectionViewCell.self)
+
+        // MainSection: 1 (FeaturedInterview)
+        collectionView.registerCustomCell(InterviewsCollectionViewCell.self)
+
+        // MainSection: 2 (RecentKeyword)
+        collectionView.registerCustomCell(RecentKeywordsCollectionViewCell.self)
+//        collectionView.registerCustomReusableHeaderView(KeywordCollectionHeaderView.self)
+//        collectionView.registerCustomReusableFooterView(KeywordCollectionFooterView.self)
+
+        // MainSection: 3 (NewArrivalArticle)
+        collectionView.registerCustomCell(NewMenuItemsCollectionViewCell.self)
+//        collectionView.registerCustomCell(NewArrivalArticlesCollectionViewCell.self)
+//        collectionView.registerCustomReusableHeaderView(NewArrivalArticlesCollectionViewCell.self)
+
+        // MainSection: 4 (RegularArticle)
+        collectionView.registerCustomCell(RecommendedArticlesCollectionViewCell.self)
+//        collectionView.registerCustomReusableHeaderView(RegularArticlesCollectionViewCell.self)
+
+        // MEMO: UICollectionViewDelegateについては従来通り
+        collectionView.delegate = self
+
+        // MEMO: UICollectionViewCompositionalLayoutを利用してレイアウトを組み立てる
+        collectionView.collectionViewLayout = compositionalLayout
+    }
 
     private func setCollectionViewCompositionalLayout() {
         snapshot = NSDiffableDataSourceSnapshot<MainSection, AnyHashable>()
@@ -117,7 +149,7 @@ class ViewController: UIViewController {
     }
 
     // 新着メニュー表示
-    private func createNewArrivalArticlesLayout() -> NSCollectionLayoutSection {
+    private func createNewMenuItemsLayout() -> NSCollectionLayoutSection {
         // MEMO: 全体幅2/3の正方形を作るために左側の幅を.fractionalWidth(0.67)に決める
         let twoThirdItemSet = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.67), heightDimension: .fractionalHeight(1.0)))
         twoThirdItemSet.contentInsets = NSDirectionalEdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
@@ -139,7 +171,7 @@ class ViewController: UIViewController {
     }
 
     // おすすめ記事一覧表示
-    private func createRegularArticlesLayout() -> NSCollectionLayoutSection {
+    private func createRecommendedArticlesLayout() -> NSCollectionLayoutSection {
         let width = scene?.windows.first?.bounds.width ?? 0
         let absoluteHeight = (width * 0.5) + 90
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(absoluteHeight))
@@ -155,6 +187,11 @@ class ViewController: UIViewController {
         section.boundarySupplementaryItems = [header]
 
         return section
+    }
+
+    private func responseAPI() {
+        let banners = mainViewModel.getBanners()
+        print("banners: \(banners)")
     }
 }
 

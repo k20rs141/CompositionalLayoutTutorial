@@ -12,8 +12,8 @@ final class MainViewModel {
     var banners: [Banners] = []
     var interviews: [Interviews] = []
     var recentKeywords: [RecentKeywords] = []
-    var newArrivalArticles: [NewArrivalArticles] = []
-    var regularArticles: [RegularArticles] = []
+    var newArrivalArticles: [NewMenuItems] = []
+    var regularArticles: [RecommendedArticles] = []
 
     init(apiProvider: APIProviderProtocol = APIProvider.shared) {
         self.apiProvider = apiProvider
