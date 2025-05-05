@@ -13,8 +13,8 @@ protocol APIProviderProtocol {
     func getBanners() -> Promise<[Banners]>
     func getInterviews() -> Promise<[Interviews]>
     func getRecentKeywords() -> Promise<[RecentKeywords]>
-    func getNewArrivalArticles() -> Promise<[NewMenuItems]>
-    func getRegularArticles() -> Promise<[RecommendedArticles]>
+    func getNewMenuItems() -> Promise<[NewMenuItems]>
+    func getRecommendedArticles() -> Promise<[RecommendedArticles]>
 }
 
 final class APIProvider: MoyaProvider<Endpoint> {
@@ -74,11 +74,11 @@ extension APIProvider: APIProviderProtocol {
         api(dataType: RecentKeywords.self, target: .recentKeywords)
     }
 
-    func getNewArrivalArticles() -> Promise<[NewMenuItems]> {
-        api(dataType: NewMenuItems.self, target: .newArrivalArticles)
+    func getNewMenuItems() -> Promise<[NewMenuItems]> {
+        api(dataType: NewMenuItems.self, target: .newMenuItems)
     }
 
-    func getRegularArticles() -> Promise<[RecommendedArticles]> {
-        api(dataType: RecommendedArticles.self, target: .regularArticles)
+    func getRecommendedArticles() -> Promise<[RecommendedArticles]> {
+        api(dataType: RecommendedArticles.self, target: .recommendedArticles)
     }
 }

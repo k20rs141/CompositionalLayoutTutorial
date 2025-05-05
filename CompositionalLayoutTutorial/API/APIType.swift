@@ -12,8 +12,8 @@ enum Endpoint {
     case banner
     case interview
     case recentKeywords
-    case newArrivalArticles
-    case regularArticles
+    case newMenuItems
+    case recommendedArticles
 }
 
 extension Endpoint: TargetType {
@@ -30,16 +30,16 @@ extension Endpoint: TargetType {
             return "/featured_interviews"
         case .recentKeywords:
             return "/keywords"
-        case .newArrivalArticles:
+        case .newMenuItems:
             return "/new_arrivals"
-        case .regularArticles:
+        case .recommendedArticles:
             return "/articles"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case .banner, .interview, .recentKeywords, .newArrivalArticles, .regularArticles:
+        case .banner, .interview, .recentKeywords, .newMenuItems, .recommendedArticles:
             return .get
         }
     }
