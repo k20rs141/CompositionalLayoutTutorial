@@ -1,28 +1,36 @@
 import Foundation
 
-enum Section: Hashable {
-    case weekly(WeeklySection)
-    case ranking(RankingSection)
-    case preview(PreviewSection)
-    case titleList(TitleListSection)
-    case banner(BannerSection)
-}
-
 struct WeeklySection: Hashable {
     var contents: [WeeklyContent]
+}
+
+struct RankingSection: Hashable {
+    var rankingTab: [RankingTab]
+}
+
+struct PreviewSection: Hashable {
+    var chapterPagesList: ChapterPageList
+}
+
+struct TitleListSection: Hashable {
+    var titleList: TitleList
+}
+
+struct BannerSection: Hashable {
+    var banners: [Banner]
 }
 
 struct WeeklyContent: Hashable {
     var isUpdated: Bool
     var updatedTimeStamp: UInt32
-    var contentItems: [ContentItem]
+    var contentItems: [WeeklyContentItem]
     
     var updatedDate: Date {
         return Date(timeIntervalSince1970: TimeInterval(updatedTimeStamp))
     }
 }
 
-enum ContentItem: Hashable {
+enum WeeklyContentItem: Hashable {
     case prBanner(Banner)
     case mvBanner(MVBanner)
     case titleGroup(TitleGroup)
@@ -36,7 +44,7 @@ struct MVBanner: Hashable {
 }
 
 struct TitleGroup: Hashable {
-    var titleGroups: [OriginalTitleGroup]
+    var originalTitleGroup: [OriginalTitleGroup]
 }
 
 struct OriginalTitleGroup: Hashable {
@@ -46,6 +54,16 @@ struct OriginalTitleGroup: Hashable {
     var viewCount: Int
     var titleUpdateStatus: BadgeType
     var chapterStartTime: UInt32
+
+    var formattedViewCount: String {
+        if viewCount >= 1_000_000 {
+            return String(format: "%.1fM", Double(viewCount) / 1_000_000)
+        } else if viewCount >= 1_000 {
+            return String(format: "%.1fK", Double(viewCount) / 1_000)
+        } else {
+            return "\(viewCount)"
+        }
+    }
 }
 
 struct CarouselBanner: Hashable {
@@ -56,19 +74,17 @@ struct MinorLanguageBanner: Hashable {
     var titles: [Title]
 }
 
-struct RankingSection: Hashable {
-    var rankedTitles: [TitleRankingGroup]
+struct RankingTab: Hashable {
+    var tabType: RankingCategoryType
+    var titleRankingGroup: [TitleRankingGroup]
 }
 
 struct TitleRankingGroup: Hashable {
     var titles: [Title]
 }
 
-struct PreviewSection: Hashable {
-    var chapterPagesList: ChapterPageList
-}
-
 struct ChapterPageList: Hashable {
+    var titleName: String
     var pages: [ChapterPage]
 }
 
@@ -77,22 +93,15 @@ struct ChapterPage: Hashable {
     var imageURLs: [URL]
 }
 
-struct TitleListSection: Hashable {
-    var titleList: TitleList
-}
-
-struct BannerSection: Hashable {
-    var banners: [Banner]
-}
-
 struct Title: Identifiable, Hashable {
     let id: String
-    let title: String
-    let thumbnailURL: URL
-    let chapterNumber: Int
+    let name: String
+    let author: String
+    let portraitImageURL: URL
+    let landscapeImageURL: URL
     let viewCount: Int
+    let languages: [Language]
     let badgeType: BadgeType
-    let languages: [String]
     
     var formattedViewCount: String {
         if viewCount >= 1_000_000 {
@@ -111,8 +120,8 @@ struct Banner: Hashable {
 }
 
 struct TitleList: Hashable {
-    let titles: [Title]
     let name: String
+    let titles: [Title]
 }
 
 enum BadgeType: String, Hashable {
@@ -121,6 +130,19 @@ enum BadgeType: String, Hashable {
     case reedition = "REEDITION"
     case ourPicks = "OUR_PICKS"
     case none
+}
+
+enum Language: String, Hashable {
+    case english = "EN"
+    case spanish = "ES"
+    case french = "FR"
+    case indonesian = "ID"
+    case portuguese_brazil = "PT-BR"
+    case russian = "RU"
+    case thai = "TH"
+    case german = "DE"
+    case italian = "IT"
+    case vietnamese = "VI"
 }
 
 enum dayOfWeek: Int, CaseIterable, Hashable {
