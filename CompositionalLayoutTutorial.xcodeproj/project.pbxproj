@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		89176E552DB7884200593AC8 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 89176E542DB7884200593AC8 /* Nuke */; };
 		89176E572DB7884200593AC8 /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 89176E562DB7884200593AC8 /* NukeExtensions */; };
 		89176E5A2DB7884C00593AC8 /* Promises in Frameworks */ = {isa = PBXBuildFile; productRef = 89176E592DB7884C00593AC8 /* Promises */; };
+		89176E832DB886A000593AC8 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89176E822DB886A000593AC8 /* MainTabBarController.swift */; };
 		89EF6A062BCE3F30005FCB8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EF6A052BCE3F30005FCB8D /* AppDelegate.swift */; };
 		89EF6A082BCE3F30005FCB8D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EF6A072BCE3F30005FCB8D /* SceneDelegate.swift */; };
 		89EF6A0A2BCE3F30005FCB8D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EF6A092BCE3F30005FCB8D /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		89176E822DB886A000593AC8 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		89EF6A022BCE3F30005FCB8D /* CompositionalLayoutTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompositionalLayoutTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89EF6A052BCE3F30005FCB8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89EF6A072BCE3F30005FCB8D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +60,12 @@
 		89F0967F2BD7643500A81C59 /* RecentKeywordsFooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentKeywordsFooterCollectionViewCell.swift; sourceTree = "<group>"; };
 		89F096812BD7647700A81C59 /* RecommendedArticlesHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedArticlesHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		89176E642DB7889B00593AC8 /* Update */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Update; sourceTree = "<group>"; };
+		89176E712DB7890400593AC8 /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
+		89F97B2F2DD6194800C4A16C /* Extensions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Extensions; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		89EF69FF2BCE3F30005FCB8D /* Frameworks */ = {
@@ -96,15 +104,19 @@
 		89EF6A042BCE3F30005FCB8D /* CompositionalLayoutTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				89176E642DB7889B00593AC8 /* Update */,
 				89EF6A052BCE3F30005FCB8D /* AppDelegate.swift */,
 				89EF6A072BCE3F30005FCB8D /* SceneDelegate.swift */,
+				89176E822DB886A000593AC8 /* MainTabBarController.swift */,
 				89F0966F2BD6769800A81C59 /* UICollectionView.swift */,
 				89F096612BD6273F00A81C59 /* API */,
 				89F0966B2BD66EB400A81C59 /* ViewModel */,
+				89176E712DB7890400593AC8 /* Model */,
 				89F0966C2BD66EBF00A81C59 /* View */,
 				89EF6A0E2BCE3F31005FCB8D /* Assets.xcassets */,
 				89EF6A102BCE3F31005FCB8D /* LaunchScreen.storyboard */,
 				89EF6A132BCE3F31005FCB8D /* Info.plist */,
+				89F97B2F2DD6194800C4A16C /* Extensions */,
 			);
 			path = CompositionalLayoutTutorial;
 			sourceTree = "<group>";
@@ -199,6 +211,11 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				89176E642DB7889B00593AC8 /* Update */,
+				89176E712DB7890400593AC8 /* Model */,
+				89F97B2F2DD6194800C4A16C /* Extensions */,
+			);
 			name = CompositionalLayoutTutorial;
 			packageProductDependencies = (
 				89176E492DB7880B00593AC8 /* PinLayout */,
@@ -275,6 +292,7 @@
 				89EF6A0A2BCE3F30005FCB8D /* ViewController.swift in Sources */,
 				89EF6A062BCE3F30005FCB8D /* AppDelegate.swift in Sources */,
 				89F096652BD6276700A81C59 /* APIType.swift in Sources */,
+				89176E832DB886A000593AC8 /* MainTabBarController.swift in Sources */,
 				89F096722BD6782000A81C59 /* BannersCollectionViewCell.swift in Sources */,
 				89F096782BD6784800A81C59 /* NewMenuItemsCollectionViewCell.swift in Sources */,
 				89F096742BD6782900A81C59 /* InterviewsCollectionViewCell.swift in Sources */,
