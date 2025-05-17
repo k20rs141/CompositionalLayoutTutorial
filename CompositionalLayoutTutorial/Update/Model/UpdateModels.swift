@@ -84,13 +84,24 @@ struct TitleRankingGroup: Hashable {
 }
 
 struct ChapterPageList: Hashable {
-    var titleName: String
-    var pages: [ChapterPage]
+    var listName: String
+    var chapterPages: [ChapterPages]
 }
 
-struct ChapterPage: Hashable {
-    var title: Title
-    var imageURLs: [URL]
+struct ChapterPages: Hashable {
+    var name: String
+    var author: String
+    var favoriteImageURL: URL
+    var pages: [Page]
+}
+
+struct Page: Hashable {
+    var mangaPage: MangaPage
+    var bannerList: [Banner]?
+
+    struct MangaPage: Hashable {
+        var imageURL: URL
+    }
 }
 
 struct Title: Identifiable, Hashable {
