@@ -12,7 +12,7 @@ enum UpdateSectionType: Int, CaseIterable, Hashable {
 enum UpdateSectionItem: Hashable {
     case header
     case weekly(WeeklyContent)
-    case ranking(TitleRankingGroup)
+    case ranking(TitleRankingGroup, Title, Int)
     case preview(ChapterPageList)
     case titleList(Title)
     case banner(Banner)
