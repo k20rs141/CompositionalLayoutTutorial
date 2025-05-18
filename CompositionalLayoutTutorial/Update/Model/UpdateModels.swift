@@ -1,5 +1,13 @@
 import Foundation
 
+struct HomeSection: Hashable {
+    var weeklySection: WeeklySection?
+    var rankingSection: RankingSection?
+    var previewSection: PreviewSection?
+    var titleListSection: TitleListSection?
+    var bannerSection: BannerSection?
+}
+
 struct WeeklySection: Hashable {
     var contents: [WeeklyContent]
 }
