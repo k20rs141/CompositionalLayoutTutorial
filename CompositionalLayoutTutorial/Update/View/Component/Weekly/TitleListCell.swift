@@ -35,7 +35,7 @@ final class TitleListCell: UICollectionViewCell {
 
     // MARK: Internal
 
-    func configure(content: Title, index: Int) {
+    func configure(content: Title) {
         titleName.text = content.name
         chapterLabel.text = "#\(content.id)"
         views.text = content.formattedViewCount
@@ -89,12 +89,16 @@ final class TitleListCell: UICollectionViewCell {
         return label
     }()
 
-    private let chapterLabel: UILabel = {
-        let label: UILabel = .init()
+    private let chapterLabel: PaddingLabel = {
+        let label = PaddingLabel()
         label.font = .systemFont(ofSize: 10, weight: .semibold)
         label.textColor = .white
-        label.backgroundColor = .gray
+        label.textColor = UIColor(hex: "EEEEEE")
+        label.backgroundColor = UIColor(hex: "353535")
+        label.padding = UIEdgeInsets(top: 2.5, left: 4, bottom: 2.5, right: 4)
         label.numberOfLines = 1
+        label.layer.cornerRadius = 3
+        label.clipsToBounds = true
         return label
     }()
 
@@ -107,7 +111,7 @@ final class TitleListCell: UICollectionViewCell {
     }()
 
     private func configureLayout() {
-        thumbnail.pin.top().horizontally().aspectRatio(5/7)
+        thumbnail.pin.top().horizontally().aspectRatio(2/3)
         if !upBadge.isHidden {
             upBadge.pin.topLeft(4).height(9%).aspectRatio()
             if !newBadge.isHidden {
@@ -120,6 +124,6 @@ final class TitleListCell: UICollectionViewCell {
         }
         titleName.pin.below(of: thumbnail, aligned: .left).horizontally().height(14).marginVertical(6)
         chapterLabel.pin.below(of: titleName, aligned: .left).height(16).sizeToFit()
-        views.pin.after(of: chapterLabel, aligned: .bottom).vCenter(to: chapterLabel.edge.vCenter).height(10).sizeToFit()
+        views.pin.after(of: chapterLabel, aligned: .center).height(10).marginLeft(6).sizeToFit()
     }
 } 

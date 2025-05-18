@@ -27,7 +27,11 @@ final class BannerSectionCell: UICollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        bannerImage.pin.horizontally().aspectRatio(16/5)
+        bannerImage.pin.top().horizontally().aspectRatio(380/105)
+    }
+
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return  .init(width: size.width, height: bannerImage.frame.maxY)
     }
 
     // MARK: Internal
