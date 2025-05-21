@@ -8,10 +8,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            // 最前列にwindowを表示
-            window.makeKeyAndVisible()
+             window.makeKeyAndVisible()
 
-            let rootViewController = ViewController()
+            let rootViewController = MainTabBarController()
             window.rootViewController = rootViewController
 
             self.window = window
