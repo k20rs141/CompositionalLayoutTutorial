@@ -39,10 +39,11 @@ struct WeeklyContent: Hashable {
 }
 
 enum WeeklyContentItem: Hashable {
+    case latestUpdate(UInt32)
     case prBanner(Banner)
     case mvBanner(MVBanner)
     case titleGroup(TitleGroup)
-    case carouselBanners(CarouselBanner)
+    case carouselBanner(CarouselBanner)
     case minorLanguageBanner(MinorLanguageBanner)
 }
 
@@ -79,7 +80,7 @@ struct CarouselBanner: Hashable {
 }
 
 struct MinorLanguageBanner: Hashable {
-    var titles: [Title]
+    var titleGroups: OriginalTitleGroup
 }
 
 struct RankingTab: Hashable {
@@ -134,6 +135,7 @@ struct Title: Identifiable, Hashable {
 }
 
 struct Banner: Hashable {
+    let id = UUID()
     let imageURL: URL
     let linkURL: URL?
 }
@@ -193,4 +195,4 @@ enum dayOfWeek: Int, CaseIterable, Hashable {
         let mappedToday = today == 1 ? 6 : today - 2
         return self.rawValue == mappedToday
     }
-} 
+}

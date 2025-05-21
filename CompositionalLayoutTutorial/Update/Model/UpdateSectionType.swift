@@ -19,12 +19,22 @@ enum UpdateSectionItem: Hashable {
 }
 
 enum WeeklyContentSection: Hashable {
+    case latestUpdate
     case prBanner
     case mvBanner
     case titleGroup
     case carouselBanners
     case minorLanguageBanner
 }
+
+enum WeeklySectionItem: Hashable {
+    case latestUpdate(UInt32)
+    case prBanner(Banner)
+    case mvBanner(MVBanner)
+    case titleGroup(OriginalTitleGroup)
+    case carouselBanner(Banner)
+    case minorLanguageBanner(MinorLanguageBanner)
+} 
 
 enum RankingCategoryType: Int, CaseIterable {
     case hottest
