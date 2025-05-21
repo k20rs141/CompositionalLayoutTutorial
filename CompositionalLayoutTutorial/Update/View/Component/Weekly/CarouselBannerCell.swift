@@ -28,7 +28,7 @@ final class CarouselBannerCell: UICollectionViewCell {
     }
 
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let height = thumbnail.frame.maxY + 16
+        let height = thumbnail.frame.maxY
         return CGSize(width: size.width, height: height)
     }
 
@@ -66,7 +66,7 @@ final class CarouselBannerCell: UICollectionViewCell {
         let imageView: UIImageView = .init()
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 6
-          imageView.clipsToBounds = true
+        imageView.clipsToBounds = true
         return imageView
     }()
 
@@ -81,6 +81,7 @@ final class CarouselBannerCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .bold)
         label.textColor = .white
+        label.textAlignment = .center
         label.layer.opacity = 0.7
         label.backgroundColor = UIColor(hex: "000000", alpha: 0.7)
         label.layer.cornerRadius = 10
@@ -89,7 +90,7 @@ final class CarouselBannerCell: UICollectionViewCell {
     }()
 
     private func configureLayout() {
-        thumbnail.pin.top(16).horizontally(16).aspectRatio(382/215)
+        thumbnail.pin.top().horizontally(16).aspectRatio(382/143)
         prBadge.pin.topRight(8).height(7.5%).aspectRatio(3/2)
         countLabel.pin.bottomRight(6).width(43).height(20)
     }

@@ -15,12 +15,13 @@ class RankingSectionCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+//        backgroundColor = .yellow
         contentView.removeFromSuperview()
         addSubview(thumbnail)
         addSubview(rankingNumber)
         addSubview(titleName)
         addSubview(author)
-        addSubview(languagesContainer)
+        addSubview(languagesCanvas)
         addSubview(views)
         views.addSubview(viewsIcon)
         views.addSubview(viewsLabel)
@@ -45,27 +46,66 @@ class RankingSectionCell: UICollectionViewCell {
         author.text = content.author
         
         // 既存の言語ラベルをクリア
-        languagesContainer.subviews.forEach { $0.removeFromSuperview() }
+        languagesCanvas.subviews.forEach { $0.removeFromSuperview() }
 
         if !content.languages.isEmpty {
             // 言語ごとにラベルを作成
-            for (index, language) in content.languages.enumerated() {
-                let label = UILabel()
-                label.font = .systemFont(ofSize: 8, weight: .semibold)
-                label.text = language.rawValue
+//            for (index, language) in content.languages.enumerated() {
+//                let label = UILabel()
+//                label.font = .systemFont(ofSize: 8, weight: .semibold)
+//                label.text = language.rawValue
+//                label.textColor = .white
+//                label.backgroundColor = UIColor(hex: "262626")
+//                label.textAlignment = .center
+//                label.layer.cornerRadius = 2
+//                label.clipsToBounds = true
+//                languagesCanvas.addSubview(label)
+//
+//                label.tag = index
+//            }
+            var tagX: CGFloat = 0
+            var tagY: CGFloat = 8
+            var tagHeight: CGFloat = 0
+            languagesCanvas.subviews.forEach { $0.removeFromSuperview() }
+            let _: [UILabel] = content.languages.enumerated().map { tuple -> UILabel in
+                let label: UILabel = .init(frame: CGRect(x: tagX, y: tagY, width: 0, height: 14))
+                let attributed: NSAttributedString = .init(
+                    string: tuple.element.rawValue,
+                    attributes: [
+                        .underlineStyle: NSUnderlineStyle.single.rawValue,
+                        .foregroundColor: UIColor.white
+                    ]
+                )
+                label.attributedText = attributed
                 label.textColor = .white
+                label.font = .systemFont(ofSize: 8, weight: .semibold)
                 label.backgroundColor = UIColor(hex: "262626")
-                label.textAlignment = .center
-                label.layer.cornerRadius = 2
-                label.clipsToBounds = true
-                languagesContainer.addSubview(label)
+                let maxWidth: CGFloat = (self.contentView.frame.width - CGFloat(24))
+                label.sizeToFit()
+                if label.frame.width > maxWidth {
+                    let size: CGSize = .init(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
+                    let fixSize: CGSize = label.sizeThatFits(size)
+                    label.frame = CGRect(x: label.frame.minX, y: label.frame.minY, width: fixSize.width, height: fixSize.height)
+                }
 
-                label.tag = index
+                tagX += label.frame.size.width + 6
+                if label.frame.maxX >= (self.contentView.frame.width - 24) {
+                    tagX = 0
+                    label.frame.origin.x = tagX
+                    tagX += label.frame.size.width + 6
+                    tagY = tagHeight + 4
+                    label.frame.origin.y = tagY
+                }
+                tagHeight = label.frame.maxY
+                languagesCanvas.addSubview(label)
+                return label
             }
-            languagesContainer.isHidden = false
+            languagesCanvas.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.width - 24, height: tagHeight)
+            languagesCanvas.isHidden = false
         } else {
-            languagesContainer.isHidden = true
+            languagesCanvas.isHidden = true
         }
+
         viewsLabel.text = content.formattedViewCount
     }
 
@@ -103,7 +143,7 @@ class RankingSectionCell: UICollectionViewCell {
         return label
     }()
 
-    private let languagesContainer: UIView = {
+    private let languagesCanvas: UIView = {
         let view = UIView()
         return view
     }()
@@ -114,7 +154,8 @@ class RankingSectionCell: UICollectionViewCell {
     }()
 
     private let viewsIcon: UIImageView = {
-        let imageView: UIImageView = .init(image: UIImage(systemName: "flame"))
+        let imageView: UIImageView = .init()
+        imageView.image = UIImage(systemName: "flame")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -128,13 +169,13 @@ class RankingSectionCell: UICollectionViewCell {
     }()
 
     private func configureLayout() {
-        thumbnail.pin.vertically().left().aspectRatio(2/3)
-        rankingNumber.pin.after(of: thumbnail, aligned: .bottom).vCenter().width(9).height(22).marginLeft(12)
-        titleName.pin.after(of: rankingNumber, aligned: .bottom).top(18.5).height(16).marginLeft(16).sizeToFit(.width)
-        author.pin.below(of: titleName, aligned: .left).height(11).marginTop(2).marginBottom(10).sizeToFit(.width)
-        languagesContainer.pin.below(of: author, aligned: .left).before(of: views, aligned: .top).height(14).sizeToFit(.width)
-        views.pin.after(of: titleName, aligned: .bottom).height(10).width(50)
-        viewsIcon.pin.left().height(10).aspectRatio()
-        viewsLabel.pin.after(of: viewsIcon, aligned: .bottom).right().vCenter().marginLeft(2)
+        thumbnail.pin.vertically().left(16).aspectRatio(2/3)
+        rankingNumber.pin.after(of: thumbnail, aligned: .center).width(15).height(22).marginLeft(12)
+        titleName.pin.after(of: rankingNumber).before(of: views).top(18.5).height(16).marginLeft(16).marginRight(8).sizeToFit(.height)
+        author.pin.below(of: titleName, aligned: .left).height(11).marginTop(2).marginBottom(10).sizeToFit(.height)
+        languagesCanvas.pin.below(of: author, aligned: .left).height(14).sizeToFit(.height)
+        views.pin.top(18.5).right(16).width(50).height(10).marginLeft(4)
+        viewsIcon.pin.left().vertically().aspectRatio()
+        viewsLabel.pin.after(of: viewsIcon, aligned: .center).right().marginLeft(2)
     }
 }

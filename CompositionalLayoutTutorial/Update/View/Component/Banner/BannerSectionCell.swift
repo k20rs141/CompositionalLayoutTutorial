@@ -25,13 +25,13 @@ final class BannerSectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return  .init(width: size.width, height: bannerImage.frame.maxY)
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         bannerImage.pin.top().horizontally().aspectRatio(380/105)
-    }
-
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return  .init(width: size.width, height: bannerImage.frame.maxY)
     }
 
     // MARK: Internal

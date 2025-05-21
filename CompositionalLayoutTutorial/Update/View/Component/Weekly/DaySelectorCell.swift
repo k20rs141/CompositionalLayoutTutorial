@@ -8,7 +8,7 @@ final class DaySelectorHeader: UICollectionReusableView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .cyan
+        backgroundColor = .cyan.withAlphaComponent(0.25)
     }
 
     @available(*, unavailable)
