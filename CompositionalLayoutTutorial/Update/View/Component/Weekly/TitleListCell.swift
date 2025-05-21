@@ -23,17 +23,37 @@ final class TitleListCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        configureLayout()
-    }
-
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         let height = chapterLabel.frame.maxY
         return CGSize(width: size.width, height: height)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        configureLayout()
+    }
+
     // MARK: Internal
+
+    func configure(content: OriginalTitleGroup) {
+        titleName.text = content.title
+        chapterLabel.text = "#\(content.chapterNumber)"
+        views.text = content.formattedViewCount
+
+        switch content.titleUpdateStatus {
+        case .up:
+            upBadge.isHidden = false
+            newBadge.isHidden = true
+        case .new:
+            upBadge.isHidden = true
+            newBadge.isHidden = false
+        case .reedition, .ourPicks, .none:
+            upBadge.isHidden = true
+            newBadge.isHidden = true
+        }
+
+        thumbnail.loadImage(with: content.titles.first?.portraitImageURL)
+    }
 
     func configure(content: Title) {
         titleName.text = content.name
@@ -123,7 +143,7 @@ final class TitleListCell: UICollectionViewCell {
             }
         }
         titleName.pin.below(of: thumbnail, aligned: .left).horizontally().height(14).marginVertical(6)
-        chapterLabel.pin.below(of: titleName, aligned: .left).height(16).sizeToFit()
-        views.pin.after(of: chapterLabel, aligned: .center).height(10).marginLeft(6).sizeToFit()
+        chapterLabel.pin.below(of: titleName, aligned: .left).height(16).sizeToFit(.height)
+        views.pin.after(of: chapterLabel, aligned: .center).height(10).marginLeft(6).sizeToFit(.height)
     }
 } 

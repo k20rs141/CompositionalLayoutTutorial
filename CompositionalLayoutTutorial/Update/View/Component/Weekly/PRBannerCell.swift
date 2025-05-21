@@ -47,6 +47,8 @@ final class PRBannerCell: UICollectionViewCell {
     private let thumbnail: UIImageView = {
         let imageView: UIImageView = .init()
         imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 6
+        imageView.clipsToBounds = true
         return imageView
     }()
 
