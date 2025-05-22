@@ -22,7 +22,6 @@
 		89F096632BD6275100A81C59 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F096622BD6275100A81C59 /* APIProvider.swift */; };
 		89F096652BD6276700A81C59 /* APIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F096642BD6276700A81C59 /* APIType.swift */; };
 		89F0966A2BD6320900A81C59 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F096692BD6320900A81C59 /* APIError.swift */; };
-		89F096702BD6769800A81C59 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0966F2BD6769800A81C59 /* UICollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +35,6 @@
 		89F096622BD6275100A81C59 /* APIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProvider.swift; sourceTree = "<group>"; };
 		89F096642BD6276700A81C59 /* APIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIType.swift; sourceTree = "<group>"; };
 		89F096692BD6320900A81C59 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
-		89F0966F2BD6769800A81C59 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -85,7 +83,6 @@
 				89EF6A052BCE3F30005FCB8D /* AppDelegate.swift */,
 				89EF6A072BCE3F30005FCB8D /* SceneDelegate.swift */,
 				89176E822DB886A000593AC8 /* MainTabBarController.swift */,
-				89F0966F2BD6769800A81C59 /* UICollectionView.swift */,
 				89F096612BD6273F00A81C59 /* API */,
 				89EF6A0E2BCE3F31005FCB8D /* Assets.xcassets */,
 				89EF6A102BCE3F31005FCB8D /* LaunchScreen.storyboard */,
@@ -198,7 +195,6 @@
 				89EF6A062BCE3F30005FCB8D /* AppDelegate.swift in Sources */,
 				89F096652BD6276700A81C59 /* APIType.swift in Sources */,
 				89176E832DB886A000593AC8 /* MainTabBarController.swift in Sources */,
-				89F096702BD6769800A81C59 /* UICollectionView.swift in Sources */,
 				89EF6A082BCE3F30005FCB8D /* SceneDelegate.swift in Sources */,
 				89F096632BD6275100A81C59 /* APIProvider.swift in Sources */,
 				89F0966A2BD6320900A81C59 /* APIError.swift in Sources */,
