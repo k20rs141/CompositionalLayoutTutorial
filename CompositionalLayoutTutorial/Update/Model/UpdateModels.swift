@@ -1,6 +1,6 @@
 import Foundation
 
-struct HomeSection: Hashable {
+struct HomeSection: Codable, Hashable {
     var weeklySection: WeeklySection?
     var rankingSection: RankingSection?
     var previewSection: PreviewSection?
@@ -8,27 +8,27 @@ struct HomeSection: Hashable {
     var bannerSection: BannerSection?
 }
 
-struct WeeklySection: Hashable {
+struct WeeklySection: Codable, Hashable {
     var contents: [WeeklyContent]
 }
 
-struct RankingSection: Hashable {
+struct RankingSection: Codable, Hashable {
     var rankingTab: [RankingTab]
 }
 
-struct PreviewSection: Hashable {
+struct PreviewSection: Codable, Hashable {
     var chapterPagesList: ChapterPageList
 }
 
-struct TitleListSection: Hashable {
+struct TitleListSection: Codable, Hashable {
     var titleList: TitleList
 }
 
-struct BannerSection: Hashable {
+struct BannerSection: Codable, Hashable {
     var banners: [Banner]
 }
 
-struct WeeklyContent: Hashable {
+struct WeeklyContent: Codable, Hashable {
     var isUpdated: Bool
     var updatedTimeStamp: UInt32
     var contentItems: [WeeklyContentItem]
@@ -38,7 +38,7 @@ struct WeeklyContent: Hashable {
     }
 }
 
-enum WeeklyContentItem: Hashable {
+enum WeeklyContentItem: Codable, Hashable {
     case latestUpdate(UInt32)
     case prBanner(Banner)
     case mvBanner(MVBanner)
@@ -47,16 +47,16 @@ enum WeeklyContentItem: Hashable {
     case minorLanguageBanner(MinorLanguageBanner)
 }
 
-struct MVBanner: Hashable {
+struct MVBanner: Codable, Hashable {
     var imageURL: URL
     var titleGroups: OriginalTitleGroup
 }
 
-struct TitleGroup: Hashable {
+struct TitleGroup: Codable, Hashable {
     var originalTitleGroup: [OriginalTitleGroup]
 }
 
-struct OriginalTitleGroup: Hashable {
+struct OriginalTitleGroup: Codable, Hashable {
     var titles: [Title]
     var title: String
     var chapterNumber: String
@@ -75,45 +75,45 @@ struct OriginalTitleGroup: Hashable {
     }
 }
 
-struct CarouselBanner: Hashable {
+struct CarouselBanner: Codable, Hashable {
     var banners: [Banner]
 }
 
-struct MinorLanguageBanner: Hashable {
+struct MinorLanguageBanner: Codable, Hashable {
     var titleGroups: OriginalTitleGroup
 }
 
-struct RankingTab: Hashable {
+struct RankingTab: Codable, Hashable {
     var tabType: RankingCategoryType
     var titleRankingGroup: [TitleRankingGroup]
 }
 
-struct TitleRankingGroup: Hashable {
+struct TitleRankingGroup: Codable, Hashable {
     var titles: [Title]
 }
 
-struct ChapterPageList: Hashable {
+struct ChapterPageList: Codable, Hashable {
     var listName: String
     var chapterPages: [ChapterPages]
 }
 
-struct ChapterPages: Hashable {
+struct ChapterPages: Codable, Hashable {
     var name: String
     var author: String
     var favoriteImageURL: URL
     var pages: [Page]
 }
 
-struct Page: Hashable {
+struct Page: Codable, Hashable {
     var mangaPage: MangaPage
     var bannerList: [Banner]?
 
-    struct MangaPage: Hashable {
+    struct MangaPage: Codable, Hashable {
         var imageURL: URL
     }
 }
 
-struct Title: Identifiable, Hashable {
+struct Title: Codable, Identifiable, Hashable {
     let id: String
     let name: String
     let author: String
@@ -134,18 +134,18 @@ struct Title: Identifiable, Hashable {
     }
 }
 
-struct Banner: Hashable {
+struct Banner: Codable, Hashable {
     let id = UUID()
     let imageURL: URL
     let linkURL: URL?
 }
 
-struct TitleList: Hashable {
+struct TitleList: Codable, Hashable {
     let name: String
     let titles: [Title]
 }
 
-enum BadgeType: String, Hashable {
+enum BadgeType: String, Codable, Hashable {
     case up = "UP"
     case new = "NEW"
     case reedition = "REEDITION"
@@ -153,7 +153,7 @@ enum BadgeType: String, Hashable {
     case none
 }
 
-enum Language: String, Hashable {
+enum Language: String, Codable, Hashable {
     case english = "EN"
     case spanish = "ES"
     case french = "FR"
