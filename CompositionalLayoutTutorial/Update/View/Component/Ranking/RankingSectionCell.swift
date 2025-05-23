@@ -15,7 +15,6 @@ class RankingSectionCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        backgroundColor = .yellow
         contentView.removeFromSuperview()
         addSubview(thumbnail)
         addSubview(rankingNumber)
@@ -30,6 +29,17 @@ class RankingSectionCell: UICollectionViewCell {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        self.frame = layoutAttributes.frame
+        setNeedsLayout()
+        layoutIfNeeded()
+
+        var newFrame = layoutAttributes.frame
+        newFrame.size.height = thumbnail.frame.maxY
+        layoutAttributes.frame = newFrame
+        return layoutAttributes
     }
 
     override func layoutSubviews() {

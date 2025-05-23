@@ -25,8 +25,15 @@ final class BannerSectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return  .init(width: size.width, height: bannerImage.frame.maxY)
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        self.frame = layoutAttributes.frame
+        setNeedsLayout()
+        layoutIfNeeded()
+
+        var newFrame = layoutAttributes.frame
+        newFrame.size.height = bannerImage.frame.maxY
+        layoutAttributes.frame = newFrame
+        return layoutAttributes
     }
 
     override func layoutSubviews() {
