@@ -32,7 +32,6 @@ extension UpdateViewModel {
         if let updatedTimeStamp = updatedTimeStamp {
             contentItems.append(.latestUpdate(updatedTimeStamp))
         }
-        // PRバナー（月曜日のみ）
         if day == .tuesday {
             if let prBanner = createMockPRBanner() {
                 contentItems.append(.prBanner(prBanner))
@@ -81,10 +80,10 @@ extension UpdateViewModel {
     }
 
     func createMockTitleGroup() -> TitleGroup {
-        let titleGroups = (0..<3).map { index in
+        let titleGroups = (0..<7).map { index in
             OriginalTitleGroup(
-                titles: createMockTitles(count: 5),
-                title: "おすすめタイトル",
+                titles: createMockTitles(count: 1),
+                title: "タイトルグループ",
                 chapterNumber: "#\(index)",
                 viewCount: Int.random(in: 10000...5000000),
                 titleUpdateStatus: .up,

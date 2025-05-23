@@ -25,11 +25,17 @@ final class UpdateViewController: UIViewController {
         loadInitialData()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationItem.backButtonDisplayMode = .minimal
+        navigationController?.navigationBar.isUserInteractionEnabled = false
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
-        let safeAreaHeight = statusBarHeight + navigationBarHeight
         let tabBarHeight: CGFloat = tabBarController?.tabBar.frame.height ?? 0
         view.pin.top(statusBarHeight).bottom(tabBarHeight).horizontally()
         collectionView.pin.all()
@@ -69,17 +75,17 @@ final class UpdateViewController: UIViewController {
     }()
 
     private func createLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, environment -> NSCollectionLayoutSection? in
-            guard let self = self, 
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment -> NSCollectionLayoutSection? in
+            guard let self = self,
                   let sectionType = self.dataSource.snapshot().sectionIdentifiers[safe: sectionIndex] else {
                 return nil
             }
-
+            let contentSize = layoutEnvironment.container.contentSize
             switch sectionType {
             case .header:
                 return self.createHeaderSection()
             case .weekly:
-                return self.createWeeklySection()
+                return self.createWeeklySection(contentSize: contentSize)
             case .ranking:
                 return self.createRankingSection()
             case .preview:
@@ -109,17 +115,13 @@ final class UpdateViewController: UIViewController {
     }
 
     // 曜日コンテンツセクション + 曜日選択ヘッダー
-    private func createWeeklySection() -> NSCollectionLayoutSection {
+    private func createWeeklySection(contentSize: CGSize) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(1000)
+            heightDimension: .estimated(120)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(1000)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPagingCentered
 
@@ -137,20 +139,15 @@ final class UpdateViewController: UIViewController {
 
         section.visibleItemsInvalidationHandler = { [weak self] (items, offset, environment) in
             guard let self = self else { return }
-            let pageWidth = environment.container.contentSize.width
+            let pageWidth = contentSize.width
             let pageIndex = Int(round(offset.x / pageWidth))
 
             if dayOfWeek.allCases.indices.contains(pageIndex) {
                 let day = dayOfWeek.allCases[pageIndex]
-                // 選択中の曜日が変更された場合のみ更新
                 if self.selectedDay != day {
                     self.selectedDay = day
                     self.viewModel.selectDay(day)
-
-                    // 曜日セレクターの選択状態を更新
-                    DispatchQueue.main.async {
-                        self.updateDaySelectorSelection(day: day)
-                    }
+                    self.updateDaySelectorSelection(day: day)
                 }
             }
         }
@@ -160,27 +157,13 @@ final class UpdateViewController: UIViewController {
     private func createRankingSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(90)
+            heightDimension: .estimated(90)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(90)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 12
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-//        let headerSize = NSCollectionLayoutSize(
-//            widthDimension: .fractionalWidth(1.0),
-//            heightDimension: .absolute(94)
-//        )
-//        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-//            layoutSize: headerSize,
-//            elementKind: UICollectionView.elementKindSectionHeader,
-//            alignment: .top
-//        )
-//        section.boundarySupplementaryItems = [sectionHeader]
         return section
     }
 
@@ -190,26 +173,9 @@ final class UpdateViewController: UIViewController {
             heightDimension: .absolute(566)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(566)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
-
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(44)
-        )
-        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        section.boundarySupplementaryItems = [sectionHeader]
 
         return section
     }
@@ -256,11 +222,7 @@ final class UpdateViewController: UIViewController {
             heightDimension: .estimated(106)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(106)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 24, leading: 16, bottom: 24, trailing: 16)
         section.interGroupSpacing = 8
@@ -459,14 +421,13 @@ final class UpdateViewController: UIViewController {
             switch sectionType {
             case .header:
                 snapshot.appendItems([.header], toSection: .header)
-                
+
             case .weekly:
                 if let weeklySection = homeSection?.weeklySection {
                     let items = weeklySection.contents.map { UpdateSectionItem.weekly($0) }
                     snapshot.appendItems(items, toSection: .weekly)
-                    print("UpdateSectionItem: \(items)")
                 }
-                
+
             case .ranking:
                 if let rankingSection = homeSection?.rankingSection,
                    let rankingTab = rankingSection.rankingTab.first,

@@ -15,8 +15,6 @@ final class WeeklySectionCell: UICollectionViewCell {
 
         weeklyContent = nil
         cancellables.removeAll()
-        var snapshot = NSDiffableDataSourceSnapshot<WeeklyContentSection, WeeklySectionItem>()
-        dataSource?.apply(snapshot, animatingDifferences: false)
     }
 
     @available(*, unavailable)
@@ -38,32 +36,17 @@ final class WeeklySectionCell: UICollectionViewCell {
     }
 
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        let targetSize = CGSize(width: layoutAttributes.frame.width, height: 0)
-        
-        var calculatedHeight: CGFloat = 0
-        if let dataSource = dataSource, !dataSource.snapshot().itemIdentifiers.isEmpty {
-            if collectionView.frame.height > 0 && collectionView.collectionViewLayout.collectionViewContentSize.height > 0 {
-                 calculatedHeight = collectionView.collectionViewLayout.collectionViewContentSize.height
-            } else {
-                calculatedHeight = 200
-            }
-        } else {
-            calculatedHeight = 50
-        }
-
-        if weeklyContent?.contentItems.isEmpty ?? true {
-            layoutAttributes.frame.size.height = 0
-        } else {
-            layoutAttributes.frame.size.height = max(0, calculatedHeight)
-        }
-        
+        self.frame = layoutAttributes.frame
+        setNeedsLayout()
+        layoutIfNeeded()
+        let internalContentHeight = collectionView.collectionViewLayout.collectionViewContentSize.height
+        var newFrame = layoutAttributes.frame
+        newFrame.size.height = internalContentHeight
+        layoutAttributes.frame = newFrame
         return layoutAttributes
     }
 
     // MARK: Internal
-
-    var loadMoreContentHandler: ((dayOfWeek, Int) -> Void)?
-    var didSelectContentHandler: ((Title) -> Void)?
 
     func configure(weeklyContent: WeeklyContent) {
         self.weeklyContent = weeklyContent
@@ -224,11 +207,6 @@ final class WeeklySectionCell: UICollectionViewCell {
             heightDimension: .absolute(27)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(27)
-        )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
@@ -251,7 +229,6 @@ final class WeeklySectionCell: UICollectionViewCell {
     }
     
     private func createMVBannerSection() -> NSCollectionLayoutSection {
-        let mvBannerHeight = MVBannerCell.height
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .estimated(225)
@@ -296,7 +273,7 @@ final class WeeklySectionCell: UICollectionViewCell {
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 0,
             leading: horizontalSpacing,
-            bottom: 32,
+            bottom: 16,
             trailing: horizontalSpacing
         )
         return section
