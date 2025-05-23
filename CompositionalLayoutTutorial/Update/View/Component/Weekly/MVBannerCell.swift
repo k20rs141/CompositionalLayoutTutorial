@@ -10,6 +10,7 @@ import UIKit
 
 final class MVBannerCell: UICollectionViewCell {
     static let reuseIdentifier = "MVBannerCell"
+    static var height: CGFloat = 0
 
     // MARK: Lifecycle
 
@@ -17,10 +18,9 @@ final class MVBannerCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.removeFromSuperview()
         backgroundColor = .clear
-
+        clipsToBounds = true
         addSubview(backgroundImage)
         backgroundImage.addSubview(backgroudGradientView)
-        backgroundImage.addSubview(updateLabel)
         backgroundImage.addSubview(bannerContainer)
         bannerContainer.addSubview(thumbnail)
         bannerContainer.addSubview(upBadge)
@@ -28,13 +28,26 @@ final class MVBannerCell: UICollectionViewCell {
         bannerContainer.addSubview(ourPicksBadge)
         bannerContainer.addSubview(thumbnailGradientView)
         bannerContainer.addSubview(titleName)
-        bannerContainer.addSubview(chapterLabel)
-        bannerContainer.addSubview(views)
+        bannerContainer.addSubview(canvus)
+        canvus.addSubview(chapterLabel)
+        canvus.addSubview(views)
     }
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        self.frame = layoutAttributes.frame
+        setNeedsLayout()
+        layoutIfNeeded()
+
+        var newFrame = layoutAttributes.frame
+        newFrame.size.height = thumbnail.frame.maxY + 16
+        layoutAttributes.frame = newFrame
+
+        return layoutAttributes
     }
 
     override func layoutSubviews() {
@@ -45,15 +58,13 @@ final class MVBannerCell: UICollectionViewCell {
     // MARK: Internal
 
     func configure(banner: MVBanner) {
-        backgroundImage.loadImage(with: banner.imageURL)
         let titleGroups = banner.titleGroups
 
         if !titleGroups.titles.isEmpty {
             guard let title = titleGroups.titles.first else { return }
 
-            thumbnail.loadImage(with: title.landscapeImageURL)
-            let timeString = titleGroups.chapterStartTime
-            updateLabel.text = "Every updates are AM \(timeString)."
+            backgroundImage.loadImage(with: title.portraitImageURL)
+            thumbnail.loadImage(with: banner.imageURL)
             upBadge.isHidden = titleGroups.titleUpdateStatus != .up
             newBadge.isHidden = titleGroups.titleUpdateStatus != .new
             ourPicksBadge.isHidden = titleGroups.titleUpdateStatus != .ourPicks
@@ -67,33 +78,21 @@ final class MVBannerCell: UICollectionViewCell {
 
     private let backgroundImage: UIImageView = {
         let imageView: UIImageView = .init()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
     }()
 
     private let backgroudGradientView: GradientView = {
         let view: GradientView = .init()
-        view.startColor = UIColor(hex: "1E1E1E", alpha: 1.0)
-        view.endColor = UIColor(hex: "1E1E1E", alpha: 0.7)
+        view.startColor = UIColor(hex: "1E1E1E", alpha: 0.7)
+        view.endColor = UIColor(hex: "1E1E1E", alpha: 1.0)
         return view
     }()
 
     private let bannerContainer: UIView = {
         let view: UIView = .init()
-        view.layer.cornerRadius = 8
-        view.layer.masksToBounds = true
         return view
-    }()
-
-    private let updateLabel: UILabel = {
-        let label: UILabel = .init()
-        label.font = .systemFont(ofSize: 11, weight: .semibold)
-        label.text = "Every updates are AM 11:00."
-        label.textColor = .white
-        label.backgroundColor = .white
-        label.layer.opacity = 0.25
-        return label
     }()
 
     private let thumbnail: UIImageView = {
@@ -107,7 +106,7 @@ final class MVBannerCell: UICollectionViewCell {
     private let thumbnailGradientView: GradientView = {
         let view: GradientView = .init()
         view.startColor = UIColor(hex: "000000", alpha: 0.0)
-        view.endColor = UIColor(hex: "000000", alpha: 0.8)
+        view.endColor = UIColor(hex: "000000", alpha: 1.0)
         return view
     }()
 
@@ -139,13 +138,21 @@ final class MVBannerCell: UICollectionViewCell {
         return label
     }()
 
-    private let chapterLabel: UILabel = {
-        let label: UILabel = .init()
+    private let canvus: UIView = {
+        let view: UIView = .init()
+        return view
+    }()
+
+    private let chapterLabel: PaddingLabel = {
+        let label = PaddingLabel()
         label.font = .systemFont(ofSize: 12, weight: .semibold)
         label.textColor = .white
-        label.backgroundColor = .white
-        label.layer.opacity = 0.2
+        label.textAlignment = .center
+        label.backgroundColor = .white.withAlphaComponent(0.2)
+        label.padding = UIEdgeInsets(top: 1.5, left: 4, bottom: 1.5, right: 4)
+        label.numberOfLines = 1
         label.layer.cornerRadius = 4
+        label.clipsToBounds = true
         return label
     }()
 
@@ -153,24 +160,26 @@ final class MVBannerCell: UICollectionViewCell {
         let label: UILabel = .init()
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textColor = UIColor(hex: "6E6F75")
+        label.textAlignment = .center
         return label
     }()
 
     private func configureLayout() {
+        let cellHeight: CGFloat = thumbnail.frame.maxY + 16
         // 背景画像を横幅いっぱいに表示し、はみ出た部分を切り取る
-        backgroundImage.pin.all()
+        backgroundImage.pin.top().horizontally().aspectRatio(CGFloat.portraitThumbnailRatio)
 
-        backgroudGradientView.pin.all()
-        updateLabel.pin.top().horizontally().height(27)
-        bannerContainer.pin.below(of: updateLabel, aligned: .center).all(16)
+        backgroudGradientView.pin.top().horizontally().height(cellHeight)
+        bannerContainer.pin.top(20).horizontally(16).height(thumbnail.frame.maxY)
         thumbnail.pin.horizontally().top().aspectRatio(2/1)
         upBadge.pin.topLeft(8).height(8.5%).aspectRatio(3/2)
         newBadge.pin.after(of: upBadge, aligned: .bottom).height(8.5%).aspectRatio(3/2).marginLeft(4)
-        ourPicksBadge.pin.top().right(8).width(100).height(40)
-        thumbnailGradientView.pin.horizontally().bottom().height(80)
-        titleName.pin.bottom(16).left(16).height(16).sizeToFit(.width)
-        chapterLabel.pin.after(of: titleName, aligned: .bottom).height(16).marginLeft(8).sizeToFit(.width)
-        views.pin.after(of: chapterLabel, aligned: .bottom).right(16).height(16).marginLeft(8).sizeToFit(.width)
+        ourPicksBadge.pin.top(-12).right(8).width(100).height(40)
+        thumbnailGradientView.pin.horizontally().bottom().height(42%)
+        titleName.pin.bottom(16).left(16).width(65%).height(16)
+        canvus.pin.bottomRight(16).width(88).height(16)
+        chapterLabel.pin.left().vertically().width(40).marginRight(8)
+        views.pin.right().vertically().width(40)
     }
 }
 
