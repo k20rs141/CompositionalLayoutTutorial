@@ -26,11 +26,6 @@ final class PRBannerCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let height = thumbnail.frame.maxY + 16
-        return CGSize(width: size.width, height: height)
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
         configureLayout()
@@ -60,7 +55,7 @@ final class PRBannerCell: UICollectionViewCell {
     }()
 
     private func configureLayout() {
-        thumbnail.pin.top(16).horizontally(16).aspectRatio(382/215)
+        thumbnail.pin.top().horizontally().aspectRatio(1 / CGFloat.prBannerRatio)
         prBadge.pin.topRight(8).height(7.5%).aspectRatio(3/2)
     }
 }

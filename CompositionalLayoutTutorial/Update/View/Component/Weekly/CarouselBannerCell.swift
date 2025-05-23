@@ -27,11 +27,6 @@ final class CarouselBannerCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let height = thumbnail.frame.maxY
-        return CGSize(width: size.width, height: height)
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
         configureLayout()
@@ -63,8 +58,8 @@ final class CarouselBannerCell: UICollectionViewCell {
     // MARK: Private
 
     private let thumbnail: UIImageView = {
-        let imageView: UIImageView = .init()
-        imageView.contentMode = .scaleAspectFit
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 6
         imageView.clipsToBounds = true
         return imageView
@@ -90,7 +85,7 @@ final class CarouselBannerCell: UICollectionViewCell {
     }()
 
     private func configureLayout() {
-        thumbnail.pin.top().horizontally(16).aspectRatio(382/143)
+        thumbnail.pin.top().horizontally().aspectRatio(.topBannerRatio)
         prBadge.pin.topRight(8).height(7.5%).aspectRatio(3/2)
         countLabel.pin.bottomRight(6).width(43).height(20)
     }

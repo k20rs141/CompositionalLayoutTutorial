@@ -23,9 +23,24 @@ final class TitleListCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let height = chapterLabel.frame.maxY
-        return CGSize(width: size.width, height: height)
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        self.frame = layoutAttributes.frame
+        setNeedsLayout()
+        layoutIfNeeded()
+
+        var height: CGFloat = 0
+        if !(chapterLabel.isHidden) {
+            height = chapterLabel.frame.maxY
+        } else if !(titleName.isHidden) {
+            height = titleName.frame.maxY
+        } else {
+            height = thumbnail.frame.maxY
+        }
+
+        var newFrame = layoutAttributes.frame
+        newFrame.size.height = height
+        layoutAttributes.frame = newFrame
+        return layoutAttributes
     }
 
     override func layoutSubviews() {
@@ -146,4 +161,4 @@ final class TitleListCell: UICollectionViewCell {
         chapterLabel.pin.below(of: titleName, aligned: .left).height(16).sizeToFit(.height)
         views.pin.after(of: chapterLabel, aligned: .center).height(10).marginLeft(6).sizeToFit(.height)
     }
-} 
+}

@@ -36,7 +36,7 @@ enum WeeklySectionItem: Hashable {
     case minorLanguageBanner(MinorLanguageBanner)
 } 
 
-enum RankingCategoryType: Int, CaseIterable {
+enum RankingCategoryType: Int, Codable, CaseIterable {
     case hottest
     case trending
     case completed

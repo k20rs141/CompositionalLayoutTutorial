@@ -59,13 +59,13 @@ class PreviewSectionCell: UICollectionViewCell {
             guard let self = self, let chapterPages = self.chapterPages else { return nil }
 
             let itemSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalHeight(0.68),
+                widthDimension: .fractionalHeight(1 / CGFloat.previewPageRatio),
                 heightDimension: .fractionalHeight(1.0)
             )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
             let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalHeight(0.68),
+                widthDimension: .fractionalHeight(1 / CGFloat.previewPageRatio),
                 heightDimension: .fractionalHeight(1.0)
             )
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])

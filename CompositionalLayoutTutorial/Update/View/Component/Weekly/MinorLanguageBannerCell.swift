@@ -17,6 +17,7 @@ final class MinorLanguageBannerCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.removeFromSuperview()
         layer.cornerRadius = 16
+        clipsToBounds = true
         backgroundColor = UIColor(hex: "0C0C0C")
         addSubview(backgroundImage)
         addSubview(titleName)
@@ -31,17 +32,17 @@ final class MinorLanguageBannerCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        self.frame = layoutAttributes.bounds
+         self.frame = layoutAttributes.frame
         setNeedsLayout()
         layoutIfNeeded()
 
         let calculatedHeight = addButton.frame.maxY + 28
+
         var newFrame = layoutAttributes.frame
         newFrame.size.height = calculatedHeight
         layoutAttributes.frame = newFrame
-        
         return layoutAttributes
     }
     
@@ -71,6 +72,7 @@ final class MinorLanguageBannerCell: UICollectionViewCell {
 
             thumbnailsContainer.addSubview(imageView)
         }
+        thumbnailsContainer.addSubview(gradientView)
         // レイアウトを更新
         setNeedsLayout()
     }
@@ -82,13 +84,6 @@ final class MinorLanguageBannerCell: UICollectionViewCell {
             popupLabel.text = "There are \(titleCount) titles available"
         }
     }
-    
-    private let thumbnailsContainer: UIView = {
-        let view = UIView()
-        //        view.backgroundColor = .clear
-        view.backgroundColor = .yellow.withAlphaComponent(0.3)
-        return view
-    }()
 
     private let backgroundImage: UIImageView = {
         let imageView: UIImageView = .init()
@@ -115,6 +110,18 @@ final class MinorLanguageBannerCell: UICollectionViewCell {
         return button
     }()
 
+    private let thumbnailsContainer: UIView = {
+        let view = UIView()
+        return view
+    }()
+
+    private let gradientView: GradientView = {
+        let view = GradientView()
+        view.startColor = UIColor(hex: "0C0C0C", alpha: 0.3)
+        view.endColor = UIColor(hex: "0C0C0C", alpha: 0.3)
+        return view
+    }()
+
     private lazy var addButton: UIButton = {
         let button: UIButton = .init()
         button.setTitle("Add English titles", for: .normal)
@@ -128,7 +135,7 @@ final class MinorLanguageBannerCell: UICollectionViewCell {
     
     private let popupImage: UIImageView = {
         let imageView: UIImageView = .init()
-        imageView.image = UIImage(resource: .callout)
+        imageView.image = UIImage(resource: .bubble)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -145,7 +152,7 @@ final class MinorLanguageBannerCell: UICollectionViewCell {
         backgroundImage.pin.top().horizontally().aspectRatio(16/9)
         titleName.pin.top(16).hCenter().height(44).sizeToFit(.height)
         closeButton.pin.topRight(10).size(24)
-        
+
         // 3列グリッドで各サムネイルを配置
         let columnCount: Int = 3
         let itemSpacing: CGFloat = 8
@@ -179,11 +186,12 @@ final class MinorLanguageBannerCell: UICollectionViewCell {
                 }
             }
         }
-        
+
+        gradientView.pin.all()
         // 下部ボタンとポップアップの配置
         addButton.pin.below(of: thumbnailsContainer).marginTop(-8).horizontally(46).height(48)
         popupImage.pin.above(of: addButton, aligned: .center).width(184).marginBottom(-8).aspectRatio(23/4)
-        popupLabel.pin.vertically().hCenter().sizeToFit(.height)
+        popupLabel.pin.top(27%).hCenter().height(11).sizeToFit(.height)
     }
     
     @objc

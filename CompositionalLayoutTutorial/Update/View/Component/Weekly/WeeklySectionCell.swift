@@ -94,19 +94,20 @@ final class WeeklySectionCell: UICollectionViewCell {
     private var cancellables = Set<AnyCancellable>()
 
     private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, environment -> NSCollectionLayoutSection? in
+        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment -> NSCollectionLayoutSection? in
             guard let self = self, let section = self.dataSource?.snapshot().sectionIdentifiers[sectionIndex] else { return nil }
+            let contentSize = layoutEnvironment.container.contentSize
             switch section {
             case .latestUpdate:
                 return self.createLatestUpdateSection()
             case .prBanner:
-                return self.createPRBannerSection()
+                return self.createPRBannerSection(contentSize: contentSize)
             case .mvBanner:
                 return self.createMVBannerSection()
             case .titleGroup:
                 return self.createContentGridSection()
             case .carouselBanners:
-                return self.createCarouselBannerSection()
+                return self.createCarouselBannerSection(contentSize: contentSize)
             case .minorLanguageBanner:
                 return self.createMinorLanguageBannerSection()
             }
@@ -228,46 +229,35 @@ final class WeeklySectionCell: UICollectionViewCell {
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .absolute(27)
         )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
 
         return section
     }
 
-    private func createPRBannerSection() -> NSCollectionLayoutSection {
+    private func createPRBannerSection(contentSize: CGSize) -> NSCollectionLayoutSection {
+        let prBannerHeight = contentSize.width * .prBannerRatio
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(245)
+            heightDimension: .absolute(prBannerHeight)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(245)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
 
         return section
     }
     
     private func createMVBannerSection() -> NSCollectionLayoutSection {
+        let mvBannerHeight = MVBannerCell.height
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .estimated(225)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(225)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         
@@ -312,23 +302,27 @@ final class WeeklySectionCell: UICollectionViewCell {
         return section
     }
     
-    private func createCarouselBannerSection() -> NSCollectionLayoutSection {
+    private func createCarouselBannerSection(contentSize: CGSize) -> NSCollectionLayoutSection {
+        let horizontalSpacing: CGFloat = 16
+        let groupSpacing: CGFloat = 8
+        let width = frame.width - horizontalSpacing * 2
+
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.9),
-            heightDimension: .estimated(145)
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4)
-        
+
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(145)
+            widthDimension: .absolute(width),
+            heightDimension: .absolute(width / .topBannerRatio)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
+
         let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = groupSpacing
         section.orthogonalScrollingBehavior = .groupPagingCentered
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: horizontalSpacing, bottom: 16, trailing: horizontalSpacing)
         
         return section
     }
@@ -339,12 +333,8 @@ final class WeeklySectionCell: UICollectionViewCell {
             heightDimension: .estimated(500)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(500)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 32, trailing: 16)
