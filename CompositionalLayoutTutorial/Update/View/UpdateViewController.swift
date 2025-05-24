@@ -118,7 +118,7 @@ final class UpdateViewController: UIViewController {
     private func createWeeklySection(contentSize: CGSize) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(120)
+            heightDimension: .estimated(1000)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
