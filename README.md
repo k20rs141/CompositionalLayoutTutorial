@@ -12,6 +12,8 @@ compositionalLayoutのみで実装できないか試してみたところペー�
 
 <img src="https://github.com/user-attachments/assets/f9519c50-38d4-427a-b8fe-b71b01deff2a" width = "25%">
 
+## 解決策
+Compositional Layoutを使用した実装ではなく横スクロール可能なセクションはUIPageViewControllerを使用し、その下のセクションはCollectionViewて組む実装にする
 
 ## 動作確認
 ### iPad OS 18.0
