@@ -11,13 +11,12 @@ import UIKit
 final class BannerSectionCell: UICollectionViewCell {
     static let reuseIdentifier = "BannerSectionCell"
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.removeFromSuperview()
-        backgroundColor = .clear
-        addSubview(bannerImage)
+        contentView.backgroundColor = .clear
+        contentView.addSubview(bannerImage)
     }
 
     @available(*, unavailable)
@@ -25,29 +24,27 @@ final class BannerSectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        self.frame = layoutAttributes.frame
-        setNeedsLayout()
-        layoutIfNeeded()
-
-        var newFrame = layoutAttributes.frame
-        newFrame.size.height = bannerImage.frame.maxY
-        layoutAttributes.frame = newFrame
-        return layoutAttributes
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
         bannerImage.pin.top().horizontally().aspectRatio(380/105)
     }
 
-    // MARK: Internal
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        setNeedsLayout()
+        layoutIfNeeded()
+        var newFrame = layoutAttributes.frame
+        newFrame.size.height = contentView.bounds.height
+        layoutAttributes.frame = newFrame
+        return layoutAttributes
+    }
+
+    // MARK: - Internal
 
     func configure(banner: Banner) {
         bannerImage.loadImage(with: banner.imageURL)
     }
 
-    // MARK: Private
+    // MARK: - Private
 
     private let bannerImage: UIImageView = {
         let imageView: UIImageView = .init()

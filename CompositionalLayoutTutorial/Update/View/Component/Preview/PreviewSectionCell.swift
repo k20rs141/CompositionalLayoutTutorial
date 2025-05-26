@@ -8,10 +8,10 @@
 import PinLayout
 import UIKit
 
-class PreviewSectionCell: UICollectionViewCell {
+final class PreviewSectionCell: UICollectionViewCell {
     static let reuseIdentifier = "PreviewSectionCell"
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,14 +28,14 @@ class PreviewSectionCell: UICollectionViewCell {
         configureLayout()
     }
 
-    // MARK: Internal
+    // MARK: - Internal
 
     func configure(content: ChapterPages) {
         self.chapterPages = content
         collectionView.reloadData()
     }
 
-    // MARK: Private
+    // MARK: - Private
 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -89,16 +89,13 @@ extension PreviewSectionCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let chapterPages = chapterPages, indexPath.row < chapterPages.pages.count else { return UICollectionViewCell() }
-        
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: ChapterPageImageCell.reuseIdentifier,
             for: indexPath
         ) as? ChapterPageImageCell else {
             return UICollectionViewCell()
         }
-
         let url = chapterPages.pages[indexPath.row].mangaPage.imageURL
         cell.configure(url: url)
         return cell

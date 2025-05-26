@@ -4,18 +4,16 @@ import PinLayout
 final class TitleListCell: UICollectionViewCell {
     static let reuseIdentifier = "MangaContentCell"
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
-        contentView.removeFromSuperview()
-        addSubview(thumbnail)
+        contentView.addSubview(thumbnail)
         thumbnail.addSubview(upBadge)
         thumbnail.addSubview(newBadge)
-        addSubview(titleName)
-        addSubview(chapterLabel)
-        addSubview(views)
+        contentView.addSubview(titleName)
+        contentView.addSubview(chapterLabel)
+        contentView.addSubview(views)
     }
 
     @available(*, unavailable)
@@ -23,11 +21,14 @@ final class TitleListCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        configureLayout()
+    }
+
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        self.frame = layoutAttributes.frame
         setNeedsLayout()
         layoutIfNeeded()
-
         var height: CGFloat = 0
         if !(chapterLabel.isHidden) {
             height = chapterLabel.frame.maxY
@@ -36,25 +37,18 @@ final class TitleListCell: UICollectionViewCell {
         } else {
             height = thumbnail.frame.maxY
         }
-
         var newFrame = layoutAttributes.frame
         newFrame.size.height = height
         layoutAttributes.frame = newFrame
         return layoutAttributes
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        configureLayout()
-    }
-
-    // MARK: Internal
+    // MARK: - Internal
 
     func configure(content: OriginalTitleGroup) {
         titleName.text = content.title
         chapterLabel.text = "#\(content.chapterNumber)"
         views.text = content.formattedViewCount
-
         switch content.titleUpdateStatus {
         case .up:
             upBadge.isHidden = false
@@ -66,7 +60,6 @@ final class TitleListCell: UICollectionViewCell {
             upBadge.isHidden = true
             newBadge.isHidden = true
         }
-
         thumbnail.loadImage(with: content.titles.first?.portraitImageURL)
     }
 
@@ -74,7 +67,6 @@ final class TitleListCell: UICollectionViewCell {
         titleName.text = content.name
         chapterLabel.text = "#\(content.id)"
         views.text = content.formattedViewCount
-
         switch content.badgeType {
         case .up:
             upBadge.isHidden = false
@@ -86,11 +78,10 @@ final class TitleListCell: UICollectionViewCell {
             upBadge.isHidden = true
             newBadge.isHidden = true
         }
-
         thumbnail.loadImage(with: content.portraitImageURL)
     }
 
-    // MARK: Private
+    // MARK: - Private
 
     private let thumbnail: UIImageView = {
         let imageView: UIImageView = .init()

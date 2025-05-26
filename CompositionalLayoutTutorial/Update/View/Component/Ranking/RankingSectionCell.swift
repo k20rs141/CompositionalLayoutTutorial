@@ -8,20 +8,20 @@
 import PinLayout
 import UIKit
 
-class RankingSectionCell: UICollectionViewCell {
+final class RankingSectionCell: UICollectionViewCell {
     static let reuseIdentifier = "RankingSectionCell"
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.removeFromSuperview()
-        addSubview(thumbnail)
-        addSubview(rankingNumber)
-        addSubview(titleName)
-        addSubview(author)
-        addSubview(languagesCanvas)
-        addSubview(views)
+        contentView.backgroundColor = .clear
+        contentView.addSubview(thumbnail)
+        contentView.addSubview(rankingNumber)
+        contentView.addSubview(titleName)
+        contentView.addSubview(author)
+        contentView.addSubview(languagesCanvas)
+        contentView.addSubview(views)
         views.addSubview(viewsIcon)
         views.addSubview(viewsLabel)
     }
@@ -31,52 +31,33 @@ class RankingSectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        self.frame = layoutAttributes.frame
-        setNeedsLayout()
-        layoutIfNeeded()
-
-        var newFrame = layoutAttributes.frame
-        newFrame.size.height = thumbnail.frame.maxY
-        layoutAttributes.frame = newFrame
-        return layoutAttributes
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
         configureLayout()
     }
 
-    // MARK: Internal
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        setNeedsLayout()
+        layoutIfNeeded()
+        var newFrame = layoutAttributes.frame
+        newFrame.size.height = contentView.bounds.height
+        layoutAttributes.frame = newFrame
+        return layoutAttributes
+    }
+
+    // MARK: - Internal
 
     func configure(content: Title, index: Int) {
         thumbnail.loadImage(with: content.portraitImageURL)
         rankingNumber.text = "\(index + 1)"
         titleName.text = content.name
         author.text = content.author
-        
-        // 既存の言語ラベルをクリア
+        // 言語バッジ
         languagesCanvas.subviews.forEach { $0.removeFromSuperview() }
-
         if !content.languages.isEmpty {
-            // 言語ごとにラベルを作成
-//            for (index, language) in content.languages.enumerated() {
-//                let label = UILabel()
-//                label.font = .systemFont(ofSize: 8, weight: .semibold)
-//                label.text = language.rawValue
-//                label.textColor = .white
-//                label.backgroundColor = UIColor(hex: "262626")
-//                label.textAlignment = .center
-//                label.layer.cornerRadius = 2
-//                label.clipsToBounds = true
-//                languagesCanvas.addSubview(label)
-//
-//                label.tag = index
-//            }
             var tagX: CGFloat = 0
-            var tagY: CGFloat = 8
+            var tagY: CGFloat = 0
             var tagHeight: CGFloat = 0
-            languagesCanvas.subviews.forEach { $0.removeFromSuperview() }
             let _: [UILabel] = content.languages.enumerated().map { tuple -> UILabel in
                 let label: UILabel = .init(frame: CGRect(x: tagX, y: tagY, width: 0, height: 14))
                 let attributed: NSAttributedString = .init(
@@ -90,14 +71,16 @@ class RankingSectionCell: UICollectionViewCell {
                 label.textColor = .white
                 label.font = .systemFont(ofSize: 8, weight: .semibold)
                 label.backgroundColor = UIColor(hex: "262626")
-                let maxWidth: CGFloat = (self.contentView.frame.width - CGFloat(24))
+                label.textAlignment = .center
+                label.layer.cornerRadius = 2
+                label.clipsToBounds = true
+                let maxWidth: CGFloat = (self.contentView.frame.width - 24)
                 label.sizeToFit()
                 if label.frame.width > maxWidth {
                     let size: CGSize = .init(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
                     let fixSize: CGSize = label.sizeThatFits(size)
                     label.frame = CGRect(x: label.frame.minX, y: label.frame.minY, width: fixSize.width, height: fixSize.height)
                 }
-
                 tagX += label.frame.size.width + 6
                 if label.frame.maxX >= (self.contentView.frame.width - 24) {
                     tagX = 0
@@ -115,11 +98,10 @@ class RankingSectionCell: UICollectionViewCell {
         } else {
             languagesCanvas.isHidden = true
         }
-
         viewsLabel.text = content.formattedViewCount
     }
 
-    // MARK: Private
+    // MARK: - Private
 
     private let thumbnail: UIImageView = {
         let imageView: UIImageView = .init()
