@@ -135,7 +135,7 @@ struct Title: Codable, Identifiable, Hashable {
 }
 
 struct Banner: Codable, Hashable {
-    let id = UUID()
+    var id = UUID()
     let imageURL: URL
     let linkURL: URL?
 }

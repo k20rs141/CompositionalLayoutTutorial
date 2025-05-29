@@ -27,11 +27,26 @@ extension UpdateViewModel {
 
     func createMockWeeklyContent(for day: dayOfWeek) -> WeeklyContent {
         var contentItems: [WeeklyContentItem] = []
-        let updatedTimeStamp: UInt32? = 1752505200
-
-        if let updatedTimeStamp = updatedTimeStamp {
-            contentItems.append(.latestUpdate(updatedTimeStamp))
+        let timestampForDay: UInt32
+        switch day {
+        case .monday:
+            timestampForDay = 1752418800 // 2025/07/14
+        case .tuesday:
+            timestampForDay = 1752505200 // 2025/07/15
+        case .wednesday:
+            timestampForDay = 1751986800 // 2025/07/09
+        case .thursday:
+            timestampForDay = 1752073200 // 2025/07/10
+        case .friday:
+            timestampForDay = 1752159600 // 2025/07/11
+        case .saturday:
+            timestampForDay = 1752246000 // 2025/07/12
+        case .sunday:
+            timestampForDay = 1752332400 // 2025/07/13
         }
+
+        contentItems.append(.latestUpdate(timestampForDay))
+        
         if day == .tuesday {
             if let prBanner = createMockPRBanner() {
                 contentItems.append(.prBanner(prBanner))
@@ -51,7 +66,7 @@ extension UpdateViewModel {
 
         return WeeklyContent(
             isUpdated: day.isToday,
-            updatedTimeStamp: 1752505200, // 2025/07/15
+            updatedTimeStamp: timestampForDay,
             contentItems: contentItems
         )
     }
@@ -168,7 +183,7 @@ extension UpdateViewModel {
     func createMockBannerSection() -> BannerSection {
         let banners = (0..<4).map { index in
             Banner(
-                imageURL: URL(string: "https://placehold.jp/3d4070/ffffff/380x106.png?id=\(index)")!,
+                imageURL: URL(string: "https://placehold.jp/3d4070/ffffff/382x120.png?id=\(index)")!,
                 linkURL: URL(string: "https://www.apple.com")
             )
         }

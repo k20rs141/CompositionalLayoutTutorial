@@ -48,8 +48,10 @@ public enum TabBarItem: Int, CaseIterable {
     var viewController: UIViewController {
         switch self {
         case .update:
+            return UpdateV2ViewController()
+        case .hot:
             return UpdateViewController()
-        case .hot, .browse, .create, .profile:
+        case .browse, .create, .profile:
             return UIViewController()
         }
     }
