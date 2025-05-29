@@ -44,7 +44,8 @@ final class MVBannerCell: UICollectionViewCell {
         layoutIfNeeded()
 
         var newFrame = layoutAttributes.frame
-        newFrame.size.height = thumbnail.frame.maxY + 16
+//        newFrame.size.height = thumbnail.frame.maxY + 16
+        newFrame.size.height = backgroudGradientView.frame.maxY
         layoutAttributes.frame = newFrame
 
         return layoutAttributes

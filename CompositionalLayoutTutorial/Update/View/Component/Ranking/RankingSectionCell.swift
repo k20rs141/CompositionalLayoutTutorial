@@ -60,19 +60,12 @@ final class RankingSectionCell: UICollectionViewCell {
             var tagHeight: CGFloat = 0
             let _: [UILabel] = content.languages.enumerated().map { tuple -> UILabel in
                 let label: UILabel = .init(frame: CGRect(x: tagX, y: tagY, width: 0, height: 14))
-                let attributed: NSAttributedString = .init(
-                    string: tuple.element.rawValue,
-                    attributes: [
-                        .underlineStyle: NSUnderlineStyle.single.rawValue,
-                        .foregroundColor: UIColor.white
-                    ]
-                )
-                label.attributedText = attributed
+                label.attributedText = NSAttributedString(string: tuple.element.rawValue)
                 label.textColor = .white
                 label.font = .systemFont(ofSize: 8, weight: .semibold)
-                label.backgroundColor = UIColor(hex: "262626")
+                label.backgroundColor = UIColor(hex: "444444")
                 label.textAlignment = .center
-                label.layer.cornerRadius = 2
+                label.layer.cornerRadius = 3
                 label.clipsToBounds = true
                 let maxWidth: CGFloat = (self.contentView.frame.width - 24)
                 label.sizeToFit()
@@ -149,6 +142,7 @@ final class RankingSectionCell: UICollectionViewCell {
         let imageView: UIImageView = .init()
         imageView.image = UIImage(systemName: "flame")
         imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .white
         return imageView
     }()
 
@@ -165,9 +159,9 @@ final class RankingSectionCell: UICollectionViewCell {
         rankingNumber.pin.after(of: thumbnail, aligned: .center).width(15).height(22).marginLeft(12)
         titleName.pin.after(of: rankingNumber).before(of: views).top(18.5).height(16).marginLeft(16).marginRight(8).sizeToFit(.height)
         author.pin.below(of: titleName, aligned: .left).height(11).marginTop(2).marginBottom(10).sizeToFit(.height)
-        languagesCanvas.pin.below(of: author, aligned: .left).height(14).sizeToFit(.height)
+        languagesCanvas.pin.below(of: author, aligned: .left).height(14).marginTop(10).sizeToFit(.height)
         views.pin.top(18.5).right(16).width(50).height(10).marginLeft(4)
         viewsIcon.pin.left().vertically().aspectRatio()
-        viewsLabel.pin.after(of: viewsIcon, aligned: .center).right().marginLeft(2)
+        viewsLabel.pin.after(of: viewsIcon).right().vertically().marginLeft(2)
     }
 }

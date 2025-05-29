@@ -15,7 +15,6 @@ final class BannerSectionCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .clear
         contentView.addSubview(bannerImage)
     }
 
@@ -26,16 +25,8 @@ final class BannerSectionCell: UICollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        bannerImage.pin.top().horizontally().aspectRatio(380/105)
-    }
-
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        setNeedsLayout()
-        layoutIfNeeded()
-        var newFrame = layoutAttributes.frame
-        newFrame.size.height = contentView.bounds.height
-        layoutAttributes.frame = newFrame
-        return layoutAttributes
+//        bannerImage.pin.top().horizontally().aspectRatio(1 / CGFloat.specialBottomBannerRatio)
+        bannerImage.pin.all()
     }
 
     // MARK: - Internal
@@ -48,7 +39,8 @@ final class BannerSectionCell: UICollectionViewCell {
 
     private let bannerImage: UIImageView = {
         let imageView: UIImageView = .init()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
 }
