@@ -39,6 +39,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		89176E642DB7889B00593AC8 /* Update */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Update; sourceTree = "<group>"; };
+		8929EF4A2DE4472200535417 /* UpdateV2 */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UpdateV2; sourceTree = "<group>"; };
 		89F97B2F2DD6194800C4A16C /* Extensions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Extensions; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -80,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				89176E642DB7889B00593AC8 /* Update */,
+				8929EF4A2DE4472200535417 /* UpdateV2 */,
 				89EF6A052BCE3F30005FCB8D /* AppDelegate.swift */,
 				89EF6A072BCE3F30005FCB8D /* SceneDelegate.swift */,
 				89176E822DB886A000593AC8 /* MainTabBarController.swift */,
@@ -119,6 +121,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				89176E642DB7889B00593AC8 /* Update */,
+				8929EF4A2DE4472200535417 /* UpdateV2 */,
 				89F97B2F2DD6194800C4A16C /* Extensions */,
 			);
 			name = CompositionalLayoutTutorial;
