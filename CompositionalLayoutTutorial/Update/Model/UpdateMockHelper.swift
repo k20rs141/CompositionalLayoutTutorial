@@ -143,23 +143,32 @@ extension UpdateViewModel {
     }
 
     func createMockPreviewSection() -> PreviewSection {
-        let chapterPages: [ChapterPages] = [
+        return PreviewSection(previewTabs: createMockPreviewTabs(count: 2))
+    }
+
+    func createMockPreviewTabs(count: Int) -> [PreviewTab] {
+        let previewTab = (0..<count).map { index in
+            PreviewTab(
+                tabType: index % 2 == 0 ? .english : .italian,
+                chapterPagesList: ChapterPageList(
+                    listName: "Preview Section",
+                    chapterPages: createChapterPages(count: 4)
+                )
+            )
+        }
+        return previewTab
+    }
+
+    func createChapterPages(count: Int) -> [ChapterPages] {
+        let chapterPages = (0..<count).map { index in
             ChapterPages(
-                name: "One Piece",
-                author: "Eiichiro Oda",
-                favoriteImageURL: URL(string: "https://placehold.jp/3d4070/ffffff/300x450.png")!,
-                pages: createMockPages()
-            ),
-            ChapterPages(
-                name: "Chainsaw Man",
-                author: "Tatsuki Fujimoto",
+                name: count % 2 == 0 ? "Chainsaw Man" : "One Piece",
+                author: count % 2 == 0 ? "Tatsuki Fujimoto" : "Eiichiro Oda",
                 favoriteImageURL: URL(string: "https://placehold.jp/3d4070/ffffff/300x450.png")!,
                 pages: createMockPages()
             )
-        ]
-
-        let chapterPageList = ChapterPageList(listName: "Preview Section", chapterPages: chapterPages)
-        return PreviewSection(chapterPagesList: chapterPageList)
+        }
+        return chapterPages
     }
 
     func createMockPages() -> [Page] {
