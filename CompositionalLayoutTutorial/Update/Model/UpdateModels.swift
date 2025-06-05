@@ -17,6 +17,11 @@ struct RankingSection: Codable, Hashable {
 }
 
 struct PreviewSection: Codable, Hashable {
+    var previewTabs: [PreviewTab]
+}
+
+struct PreviewTab: Codable, Hashable {
+    var tabType: Language
     var chapterPagesList: ChapterPageList
 }
 
