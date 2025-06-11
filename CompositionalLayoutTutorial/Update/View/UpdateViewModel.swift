@@ -55,8 +55,8 @@ class UpdateViewModel {
         if let rankingSection = homeSection.rankingSection, !rankingSection.rankingTab.isEmpty {
             sectionTypes.append(.ranking)
         }
-        if let previewSection = homeSection.previewSection, 
-           !previewSection.chapterPagesList.chapterPages.isEmpty {
+        if let previewSection = homeSection.previewSection,
+           !previewSection.previewTabs.isEmpty {
             sectionTypes.append(.preview)
         }
         if let titleListSection = homeSection.titleListSection, 

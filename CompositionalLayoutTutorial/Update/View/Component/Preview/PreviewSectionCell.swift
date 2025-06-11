@@ -320,7 +320,7 @@ extension PreviewSectionCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let previewTabs = !previewTabs.isEmpty else { return UICollectionViewCell() }
+        guard !previewTabs.isEmpty else { return UICollectionViewCell() }
         
         if collectionView == thumbnailCollectionView {
             guard let cell = collectionView.dequeueReusableCell(
@@ -330,7 +330,7 @@ extension PreviewSectionCell: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             let tab = previewTabs[indexPath.row]
-            let isSelected = indexPath.row == selectedTabIndex
+            let isSelected = indexPath.row == selectedContentIndex
             cell.configure(tab: tab, isSelected: isSelected)
             return cell
         } else if collectionView == pageCollectionView {
@@ -356,15 +356,18 @@ extension PreviewSectionCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == thumbnailCollectionView {
             // サムネイルがタップされた場合
-            let previousIndex = selectedTabIndex
-            selectedTabIndex = indexPath.row
+            let previousContentIndex = selectedContentIndex
+            selectedContentIndex = indexPath.row // コンテンツインデックスのみ変更
 
-            if previousIndex != selectedTabIndex {
-                // 選択状態が変わった場合のみ更新
+            if previousContentIndex != selectedContentIndex {
+                // 選択されたコンテンツが変わった場合のみ更新
                 updateSelectedContent()
 
-                // サムネイルリストの表示を更新
-                thumbnailCollectionView.reloadItems(at: [IndexPath(row: previousIndex, section: 0), indexPath])
+                // サムネイルリストの表示を更新（以前と現在の選択状態を更新）
+                thumbnailCollectionView.reloadItems(at: [
+                    IndexPath(row: previousContentIndex, section: 0), 
+                    IndexPath(row: selectedContentIndex, section: 0)
+                ])
             }
         } else if collectionView == pageCollectionView {
             onSelect?(indexPath.row)

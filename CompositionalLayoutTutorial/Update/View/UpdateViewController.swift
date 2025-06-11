@@ -263,7 +263,7 @@ final class UpdateViewController: UIViewController {
                 cell.configure(content: title, index: index)
                 return cell
 
-            case let .preview(chapterPageList):
+            case let .preview(previewSection):
                 guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: PreviewSectionCell.reuseIdentifier,
                     for: indexPath
@@ -271,7 +271,7 @@ final class UpdateViewController: UIViewController {
                     return nil
                 }
 
-                cell.configure(content: chapterPageList.chapterPages.first!)
+                cell.configure(previewTabs: previewSection.previewTabs)
                 return cell
 
             case let .titleList(originalTitleGroup):
@@ -442,7 +442,7 @@ final class UpdateViewController: UIViewController {
 
             case .preview:
                 if let previewSection = homeSection?.previewSection {
-                    snapshot.appendItems([.preview(previewSection.chapterPagesList)], toSection: .preview)
+                    snapshot.appendItems([.preview(previewSection)], toSection: .preview)
                 }
                 
             case .titleList:

@@ -331,7 +331,7 @@ final class UpdateV2ViewController: UIViewController, UIPageViewControllerDataSo
                 cell.configure(content: title, index: index)
                 return cell
 
-            case let .preview(chapterPageList):
+            case let .preview(previewSection):
                 guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: PreviewSectionCell.reuseIdentifier,
                     for: indexPath
@@ -339,7 +339,7 @@ final class UpdateV2ViewController: UIViewController, UIPageViewControllerDataSo
                     return nil
                 }
 
-                cell.configure(content: chapterPageList.chapterPages.first!)
+                cell.configure(previewTabs: previewSection.previewTabs)
                 return cell
 
             case let .titleList(originalTitleGroup):
@@ -382,14 +382,35 @@ final class UpdateV2ViewController: UIViewController, UIPageViewControllerDataSo
                     let rankingTabs = self.homeSection?.rankingSection?.rankingTab ?? []
                     headerView.configure(title: "Ranking", tabs: rankingTabs, seeMoreAction: {
                         print("Ranking See More Tapped!")
-                    }, onTabSelected: { [weak self] index in
-                        guard let self = self else { return }
-                        // CollectionViewをスクロール
-                        let sectionContentWidth = self.collectionView.bounds.width
-                        let offsetX = sectionContentWidth * CGFloat(index)
-                        // Y座標は現在のcollectionViewのcontentOffset.yを維持する
-                        let currentYOffset = self.collectionView.contentOffset.y
-                        self.collectionView.setContentOffset(CGPoint(x: offsetX, y: currentYOffset), animated: true)
+                    }, onTabSelected: { [weak self] selectedTabIndexInHeader in
+                        guard let self = self,
+                              let rankingSectionIndex = self.sectionTypes.firstIndex(of: .ranking) else { return }
+
+                        // 1ページあたりのアイテム数を決定するロジック
+                        // ここでは、1つの TitleRankingGroup が1ページに対応し、その中の titles.count がアイテム数。
+                        // 最大で rankingColumns 個表示される想定。
+                        // 各タブ（ページ）が持つアイテムの総数を計算する。
+                        // applySnapshotでのアイテム追加ロジックと密接に関連する。
+                        // 今回は、各タブページが厳密に self.rankingColumns 個のアイテムを持つと仮定する。
+                        // (より正確には、各タブの実際のアイテム数を集計してオフセットを計算する必要がある)
+                        let itemsPerPage = self.rankingColumns // 1ページあたりのアイテム数 (仮定)
+                        let firstItemInPageIndex = selectedTabIndexInHeader * itemsPerPage
+                        
+                        let currentSnapshot = self.dataSource.snapshot()
+                        let itemsInRankingSection = currentSnapshot.itemIdentifiers(inSection: .ranking)
+
+                        if itemsInRankingSection.indices.contains(firstItemInPageIndex) {
+                            let targetIndexPath = IndexPath(item: firstItemInPageIndex, section: rankingSectionIndex)
+                            
+                            // .left でセクションの左端に表示
+                            self.collectionView.scrollToItem(at: targetIndexPath, at: .left, animated: true)
+                        } else {
+                            // 計算したインデックスにアイテムが存在しない場合のフォールバック処理
+                            // (例: そのタブの有効な最初のアイテムを探す、またはエラーログ)
+                            print("Error: Target item index \(firstItemInPageIndex) is out of bounds for ranking section items (count: \(itemsInRankingSection.count)). Tab index: \(selectedTabIndexInHeader)")
+                            // より安全なフォールバックとして、そのタブに属する最初のアイテムを探すロジックを追加することもできる。
+                            // 例えば、スナップショット内のアイテムをフィルタリングして、該当タブの最初のアイテムのIndexPathを取得するなど。
+                        }
                     })
                     return headerView
                 }
@@ -524,7 +545,7 @@ final class UpdateV2ViewController: UIViewController, UIPageViewControllerDataSo
                 }
             case .preview:
                 if let previewSection = homeSection.previewSection {
-                    snapshot.appendItems([.preview(previewSection.chapterPagesList)], toSection: .preview)
+                    snapshot.appendItems([.preview(previewSection)], toSection: .preview)
                 }
                 
             case .titleList:
