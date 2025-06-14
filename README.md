@@ -1,5 +1,7 @@
 # CompositionalLayoutTutorial
 
+## アーキテクチャ
+
 ## モックサーバの環境構築
 ローカルでサーバを立てるために今回はjson-serverを導入
 
